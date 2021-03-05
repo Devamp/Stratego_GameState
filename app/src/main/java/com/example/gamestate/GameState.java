@@ -18,4 +18,8 @@ public class GameState {
     public GameState(){
         //Should initialize all the variables to have start of game values
     }
+
+    public GameState(GameState original){
+
+    }
 }
