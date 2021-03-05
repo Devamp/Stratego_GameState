@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GameState</string>
+    <string name="run_test_btn">Run Test</string>
+    <string name="hint_text">Edit Text</string>
 </resources>
