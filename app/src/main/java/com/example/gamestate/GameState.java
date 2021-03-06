@@ -108,8 +108,11 @@ public class GameState {
         phase = original.phase;
     }
 
-    //Check if is movable
+
     public int[][] move(int sCol, int sRow, int fCol, int fRow){
+        //Check initial spot
+
+        //Check if is movable
         if(board[sCol][sRow]%12 > 9  || board[sCol][sRow]%12 <0 ){
             //INVALID
             return null;
