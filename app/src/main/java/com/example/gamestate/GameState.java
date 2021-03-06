@@ -15,12 +15,13 @@ public class GameState {
     private int[] redCharacter;
     //turn indicator
     private int turn;
-    //Board
+    //Board: -1 = empty space, -2 = impassable space (lake), -3 = invisible character (other army)
     private int[][] board;
     //Game Timer
     private float timer;
     //Phase Indicator
     private int phase;
+
     /**
      * ctor
      *
@@ -56,14 +57,53 @@ public class GameState {
         blueCharacter[11] = 1;
         //initialize other values
         turn = 0;
+
+        //initialize board array with -1 in all empty slots
         board = new int[10][10];
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j <board[i].length; i++){
+                //Make the lakes in the center of the board equal -2. Spaces with -2 can't
+                //be crossed/moved into
+                if((i == 4 || i == 5) && (j == 2 || j == 3 || j == 6 || j == 7)){
+                    board[i][j] = -2;
+                }else{
+                    board[i][j] = -1;
+                }
+            }
+        }
+
         timer = 0;
         phase = 0;
 
     }
 
+    /**
+     * copy constructor displays only the half of the pieces that belong to the given character
+     *
+     * @param original
+     */
     public GameState(GameState original){
+        //make new array for the board
+        board = new int[10][10];
 
+        //set the new board state equal to original board state
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++){
 
+                if(board[i][j] > 11 && turn == 0){ //If it's blue's piece on red's turn, value is -3
+                    board[i][j] = -3;
+                }else if(board[i][j] < 12 && turn == 1){ //If it's red's piece on blue's turn,
+                                                         // value is -3
+                    board[i][j] = -3;
+                }else{ //print the rest of the board state
+                    board[i][j] = original.board[i][j];
+                }
+            }
+        }
+
+        //copy over information (not deep copied)
+        turn = original.turn;
+        timer = original.timer;
+        phase = original.phase;
     }
 }
