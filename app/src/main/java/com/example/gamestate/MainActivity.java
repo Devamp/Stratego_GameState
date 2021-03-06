@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 String toString = firstInstance.toString();
                 mainText.setText(toString);
                 mainText.append(spy.toString());
-//                GameState firstInstance = new GameState();
             }
         });
     }

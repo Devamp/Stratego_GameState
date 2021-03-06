@@ -67,7 +67,7 @@ public class GameState {
         //initialize board array with -1 in all empty slots
         board = new int[10][10];
         for(int i = 0; i < board.length; i++){
-            for(int j = 0; j <board[i].length; i++){
+            for(int j = 0; j < board[i].length; j++){
                 //Make the lakes in the center of the board equal -2. Spaces with -2 can't
                 //be crossed/moved into
                 if((i == 4 || i == 5) && (j == 2 || j == 3 || j == 6 || j == 7)){
@@ -80,9 +80,6 @@ public class GameState {
 
         timer = 0;
         phase = 0; // 0 = placement, 1 = game, 2 = end play
-
-
-
 
     }
 

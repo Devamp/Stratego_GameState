@@ -44,5 +44,13 @@ public class Piece {
         return value;
     }
 
+    public void setPlayer(int player){
+        this.player = player;
+    }
+
+    public int getPlayer(){
+        return player;
+    }
+
 }
 
