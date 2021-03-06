@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         EditText mainText = (EditText) findViewById(R.id.mainText);
 
+        //Create a test piece
+        Piece spy = new Piece("Spy", 0, 1);
+
         //Setup runTestBtn and it's onClick method
         Button runTestBtn = (Button) findViewById(R.id.runTestButton);
         runTestBtn.setOnClickListener(new View.OnClickListener(){
@@ -39,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //clear the edit text
                 mainText.setText("");
-
-                GameState firstInstance = new GameState();
+                mainText.append(spy.toString());
+//                GameState firstInstance = new GameState();
             }
         });
     }
