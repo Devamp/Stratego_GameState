@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Setup runTestBtn and it's onClick method
         Button runTestBtn = (Button) findViewById(R.id.runTestButton);
+
         runTestBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 mainText.setText("");
 
                 GameState firstInstance = new GameState();
+
+                //call toString
+                String toString = firstInstance.toString();
             }
         });
     }
