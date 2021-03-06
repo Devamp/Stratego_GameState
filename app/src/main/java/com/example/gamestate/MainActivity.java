@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //call toString
                 String toString = firstInstance.toString();
+                mainText.setText(toString);
             }
         });
     }

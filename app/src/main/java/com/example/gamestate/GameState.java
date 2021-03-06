@@ -77,7 +77,9 @@ public class GameState {
 
     @Override
     public String toString(){
-        System.out.println("********** GAME STATE INFO **********");
+        String finalMessage;
+
+        //System.out.println("********** GAME STATE INFO **********");
         //print whos turn
         String player;
         if(turn == 0){
@@ -85,10 +87,10 @@ public class GameState {
         } else {
             player = "Blue";
         }
-        System.out.println("Player Turn: " + player);
+       // System.out.println("Player Turn: " + player);
 
         //print game timer
-        System.out.println("Game Time: " + timer);
+       // System.out.println("Game Time: " + timer);
 
         //print game phase
         String gamePhase;
@@ -101,7 +103,7 @@ public class GameState {
         } else {
             gamePhase = ""; //error
         }
-        System.out.println("Current Game Phase: " + gamePhase);
+        //System.out.println("Current Game Phase: " + gamePhase);
 
         //print board
         for(int row = 0; row < board.length; row++){
@@ -112,9 +114,15 @@ public class GameState {
         }
 
         //print redCharacter count
+        String redTroops;
+        for(int i = 0; i < redCharacter.length; i++){
+
+        }
 
         //print blueCharacter count
 
-        return "";
+        finalMessage = "********** GAME STATE INFO ********** \n Player Turn: " + player + "\n Game Time: " + timer + "\n Current Game Phase: "
+                        + gamePhase + "\n\n" + " Red Player Characters: " + "\n\n" + " Blue Player Characters: " ;
+        return finalMessage;
     }
 }
