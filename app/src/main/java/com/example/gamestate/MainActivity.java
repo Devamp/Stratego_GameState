@@ -32,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         EditText mainText = (EditText) findViewById(R.id.mainText);
 
+        //Create a test piece
+        Piece spy = new Piece("Spy", 0, 1);
+
         //Setup runTestBtn and it's onClick method
         Button runTestBtn = (Button) findViewById(R.id.runTestButton);
-
         runTestBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 //call toString
                 String toString = firstInstance.toString();
                 mainText.setText(toString);
+                mainText.append(spy.toString());
+//                GameState firstInstance = new GameState();
             }
         });
     }
