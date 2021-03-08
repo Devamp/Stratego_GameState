@@ -34,18 +34,18 @@ public class GameState {
         blueCharacter = new int[12];
 
         //Initialize red values
-        redCharacter[0] = 1;
-        redCharacter[1] = 1;
-        redCharacter[2] = 1;
-        redCharacter[3] = 2;
-        redCharacter[4] = 3;
-        redCharacter[5] = 4;
-        redCharacter[6] = 4;
-        redCharacter[7] = 4;
-        redCharacter[8] = 5;
-        redCharacter[9] = 8;
-        redCharacter[10] = 6;
-        redCharacter[11] = 1;
+        redCharacter[0] = 1; //flag
+        redCharacter[1] = 1; //marshall
+        redCharacter[2] = 1; //general
+        redCharacter[3] = 2; //colonel
+        redCharacter[4] = 3; //major
+        redCharacter[5] = 4; //captain
+        redCharacter[6] = 4; //Lieutenant
+        redCharacter[7] = 4; //sergeant
+        redCharacter[8] = 5; //miner
+        redCharacter[9] = 8; //scout
+        redCharacter[10] = 6; //bomb
+        redCharacter[11] = 1; //spy
 
         //Initialize blue values
         blueCharacter[0] = 1;
@@ -325,7 +325,6 @@ public class GameState {
             gamePhase = ""; //error
         }
 
-
         //print board
         for(int row = 0; row < board.length; row++){
             for(int col = 0; col < board[row].length; col++){
@@ -334,32 +333,39 @@ public class GameState {
             System.out.println();
         }
 
-        //print redCharacter count
-        String redTroops;
-        for(int i = 0; i < redCharacter.length; i++){
-
-        }
-
         //print blueCharacter count
-        finalMessage = "********** GAME STATE INFO ********** " +
+        finalMessage =
+                "********** GAME STATE INFO ********** " +
                 "\n Player Turn: " + player +
                 "\n Game Time: " + timer +
                 "\n Current Game Phase: " + gamePhase +
-                "\n\n" + " Red Player Characters: " +
-                "\n" + "Flag: " +
-                "\n" + "Bomb: " +
-                "\n" + "Spy: " +
-                "\n" + "Scout: " +
-                "\n" + "Miner: " +
-                "\n" + "Sergeant: " +
-                "\n" + "Lieutenant: " +
-                "\n" + "Captain: " +
-                "\n" + "Major: " +
-                "\n" + "Colonel: " +
-                "\n" + "General: " +
-                "\n" + "Marshall: " +
+                "\n\n" + "Red Player Characters: " +
+                "\n" + "Flag: " + redCharacter[0] +
+                "\n" + "Bomb: " + redCharacter[10] +
+                "\n" + "Spy: " + redCharacter[11] +
+                "\n" + "Scout: " + redCharacter[9] +
+                "\n" + "Miner: " + redCharacter[8] +
+                "\n" + "Sergeant: " + redCharacter[7] +
+                "\n" + "Lieutenant: " + redCharacter[6] +
+                "\n" + "Captain: " + redCharacter[5] +
+                "\n" + "Major: " + redCharacter[4] +
+                "\n" + "Colonel: " + redCharacter[3] +
+                "\n" + "General: " + redCharacter[2] +
+                "\n" + "Marshall: " + redCharacter[1] +
 
-                "\n\n" + " Blue Player Characters: " +
+                "\n\n" + "Blue Player Characters: " +
+                "\n" + "Flag: " + blueCharacter[0] +
+                "\n" + "Bomb: " + blueCharacter[10] +
+                "\n" + "Spy: " + blueCharacter[11] +
+                "\n" + "Scout: " + blueCharacter[9] +
+                "\n" + "Miner: " + blueCharacter[8] +
+                "\n" + "Sergeant: " + blueCharacter[7] +
+                "\n" + "Lieutenant: " + blueCharacter[6] +
+                "\n" + "Captain: " + blueCharacter[5] +
+                "\n" + "Major: " + blueCharacter[4] +
+                "\n" + "Colonel: " + blueCharacter[3] +
+                "\n" + "General: " + blueCharacter[2] +
+                "\n" + "Marshall: " + blueCharacter[1] +
                 "\n\n" ;
 
         return finalMessage;
