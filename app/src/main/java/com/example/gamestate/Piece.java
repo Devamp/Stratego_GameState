@@ -52,5 +52,25 @@ public class Piece {
         return player;
     }
 
+    public boolean move(Piece toMove){
+        boolean toReturn = true;
+
+        //add if conditional for center lakes
+
+        //if the place where the piece is moving is null, it is empty
+        //and can't move there
+        if(toMove != null){
+            toReturn = false;
+        }
+        //if a piece tries to move onto a space that is occupied by a friendly piece, can't move
+        else if(this.getPlayer() == toMove.getPlayer()){
+            toReturn = false;
+        }else{
+            toReturn = true;
+        }
+
+        return toReturn;
+    }
+
 }
 
