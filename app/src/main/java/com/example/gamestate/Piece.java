@@ -52,24 +52,35 @@ public class Piece {
         return player;
     }
 
-    public boolean move(Piece toMove){
+    public boolean move(Piece toPlace){
         boolean toReturn = true;
 
         //add if conditional for center lakes
 
         //if the place where the piece is moving is null, it is empty
         //and can't move there
-        if(toMove != null){
-            toReturn = false;
+        if(toPlace == null){
+            toReturn = true;
         }
         //if a piece tries to move onto a space that is occupied by a friendly piece, can't move
-        else if(this.getPlayer() == toMove.getPlayer()){
+        else if(this.getPlayer() == toPlace.getPlayer()){
             toReturn = false;
-        }else{
+        }
+        else if((this.getPlayer()+1)%2 == toPlace.getPlayer()){
+            this.attack(this,toPlace);
+        }
+        else if(toPlace.getPlayer() == -1){
+            toReturn = false;
+        }
+        else{
             toReturn = true;
         }
 
         return toReturn;
+    }
+
+    public boolean attack(Piece Attacking, Piece toAttack){
+        return true;
     }
 
 }
