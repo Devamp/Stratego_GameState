@@ -217,6 +217,90 @@ public class GameState {
         return board;
     }
 
+    public int[][] attack(int sCol, int sRow, int fCol, int fRow) {
+        // CONDITION CHECKS
+        // check player turn
+        if (board[sCol][sRow] > 11 && turn == 0 || board[sCol][sRow] < 12 && turn == 1) {
+            return null;
+        }
+
+        // check out of bounds
+        else if(sCol > 9 || sRow > 9 || fCol > 9 || fRow > 9) {
+            return null;
+        }
+
+        //check friendly pieces
+        else if (board[sCol][sRow] > 11 && turn == 0) {
+            if (board[fCol][fRow] > 11) {
+                return null;
+            }
+        }
+        else if (board[sCol][sRow] < 12 && turn == 1) {
+            if (board[fCol][fRow] < 12) {
+                return null;
+            }
+        }
+
+        // ATTACK
+        // Bomb and flag cannot attack
+        if (board[sCol][sRow]%12 == 10 || board[sCol][sRow]%12 == 11) {
+            return null; //invalid
+        }
+        // Bomb Case with Miner
+        if (board[sCol][sRow]%12 == 8 && board[fCol][fRow]%12 == 10) {
+            board [sCol][sRow] = board[fCol][fRow];
+            board[fCol][fRow] = -1;
+        }
+        // Bomb case without Miner
+        if (board[sCol][sRow]%12 != 8 && board[fCol][fRow]%12 == 10) {
+            board[sCol][sRow] = -1;
+        }
+        // Spy attack Marshall
+        if (board[sCol][sRow]%12 == 0 && board[fCol][fRow]%12 == 1) {
+            board [sCol][sRow] = board[fCol][fRow];
+            board[fCol][fRow] = -1;
+        }
+        // Marshall attack Spy
+        if (board[sCol][sRow]%12 == 1 && board[fCol][fRow]%12 == 0) {
+            board [sCol][sRow] = board[fCol][fRow];
+            board[fCol][fRow] = -1;
+        }
+
+        //spy tries attacking other pieces
+        if (board[sCol][sRow]%12 == 0 && board[fCol][fRow]%12 != 1) {
+            board[sCol][sRow] = -1;
+        }
+
+        // Other pieces try attacking Spy
+        if (board[sCol][sRow]%12 != 0 && board[fCol][fRow]%12 == 1) {
+            board[sCol][sRow] = board[fCol][fRow];
+            board[fCol][fRow] = -1; ;
+        }
+
+        // pieces are the same
+        if (board[sCol][sRow]%12 == board[fCol][fRow]%12) {
+            board[sCol][sRow] = -1;
+            board[fCol][fRow] = -1;
+        }
+
+        // all movable pieces capture flag
+        if (board[fCol][fRow]%12 == 11) {
+            board [sCol][sRow] = board[fCol][fRow];
+            board[fCol][fRow] = -1;
+        }
+
+        // successful attack (negate spy)
+        if (board[sCol][sRow]%12 < board[fCol][fRow]%12 && board[sCol][sRow]%12 != 0) {
+            board[sCol][sRow] = board[fCol][fRow];
+            board[fCol][fRow] = -1;
+        }
+        // unsuccessful attack (negate spy)
+        if (board[sCol][sRow]%12 > board[fCol][fRow]%12 && board[fCol][fRow]%12 != 0) {
+            board[sCol][sRow] = -1;
+        }
+        return board;
+    }
+
     @Override
     public String toString(){
         String finalMessage;
@@ -262,6 +346,19 @@ public class GameState {
                 "\n Game Time: " + timer +
                 "\n Current Game Phase: " + gamePhase +
                 "\n\n" + " Red Player Characters: " +
+                "\n" + "Flag: " +
+                "\n" + "Bomb: " +
+                "\n" + "Spy: " +
+                "\n" + "Scout: " +
+                "\n" + "Miner: " +
+                "\n" + "Sergeant: " +
+                "\n" + "Lieutenant: " +
+                "\n" + "Captain: " +
+                "\n" + "Major: " +
+                "\n" + "Colonel: " +
+                "\n" + "General: " +
+                "\n" + "Marshall: " +
+
                 "\n\n" + " Blue Player Characters: " +
                 "\n\n" ;
 
