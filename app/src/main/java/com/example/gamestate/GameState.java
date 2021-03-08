@@ -301,6 +301,7 @@ public class GameState {
         return board;
     }
 
+    //toString method print current state of the game as a String
     @Override
     public String toString(){
         String finalMessage;
@@ -366,7 +367,7 @@ public class GameState {
                 "\n" + "Colonel: " + blueCharacter[3] +
                 "\n" + "General: " + blueCharacter[2] +
                 "\n" + "Marshall: " + blueCharacter[1] +
-                "\n\n" ;
+                "\n\n";
 
         return finalMessage;
     }
