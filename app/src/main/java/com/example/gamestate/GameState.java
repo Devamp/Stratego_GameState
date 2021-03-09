@@ -411,4 +411,24 @@ public class GameState {
 
         return finalMessage;
     }
+
+    public boolean endTurn(int turn) {
+        boolean isTrue = false;
+        // Player 1 (represented by 0) ended turn
+         if (turn == 0) {
+             turn = 1;
+             isTrue = true;
+         }
+         // Player 2 (represented by 1) ended turn
+         else if (turn == 1){
+             turn = 0;
+             isTrue = true;
+        }
+         // Handle Errors
+         // Return false, so the action is invalid
+         else {
+             isTrue = false;
+         }
+         return isTrue;
+    }
 }
