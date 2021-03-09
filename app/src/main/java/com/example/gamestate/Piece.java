@@ -8,12 +8,13 @@ package com.example.gamestate;
 public class Piece {
 
     //player number (0 = red, 1 = blue)
+    //Lake = -1
     private int player;
 
     private String name;
-
     //if the value is -1, it is a flag
     //if the value is -2, it is a bomb
+    //if the value is 10, it is the spy
     private int value;
 
     public Piece(String name, int val, int player){
@@ -67,7 +68,7 @@ public class Piece {
             toReturn = false;
         }
         else if((this.getPlayer()+1)%2 == toPlace.getPlayer()){
-            this.attack(this,toPlace);
+            this.attack(toPlace);
         }
         else if(toPlace.getPlayer() == -1){
             toReturn = false;
@@ -79,7 +80,8 @@ public class Piece {
         return toReturn;
     }
 
-    public boolean attack(Piece Attacking, Piece toAttack){
+    public boolean attack(Piece toAttack){
+
         return true;
     }
 

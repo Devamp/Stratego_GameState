@@ -18,7 +18,7 @@ public class GameState {
     //turn indicator // red = 0, blue = 1
     private int turn;
     //Board: -1 = empty space, -2 = impassable space (lake), -3 = invisible character (other army)
-    private int[][] board;
+    private Piece[][] board;
     //Game Timer
     private float timer;
     //Phase Indicator
@@ -65,15 +65,15 @@ public class GameState {
         turn = 0;
 
         //initialize board array with -1 in all empty slots
-        board = new int[10][10];
+        board = new Piece[10][10];
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++){
                 //Make the lakes in the center of the board equal -2. Spaces with -2 can't
                 //be crossed/moved into
                 if((i == 4 || i == 5) && (j == 2 || j == 3 || j == 6 || j == 7)){
-                    board[i][j] = -2;
+                    board[i][j] = new Piece("Lake",-1,-1);
                 }else{
-                    board[i][j] = -1;
+                    board[i][j] = null;
                 }
             }
         }
@@ -92,8 +92,9 @@ public class GameState {
      * @param original
      */
     public GameState(GameState original){
+        /*
         //make new array for the board
-        board = new int[10][10];
+        board = new Piece[10][10];
 
         //set the new board state equal to original board state
         for(int i = 0; i < board.length; i++){
@@ -114,9 +115,47 @@ public class GameState {
         turn = original.turn;
         timer = original.timer;
         phase = original.phase;
+
+         */
+    }
+
+    public boolean action(int fromX, int fromY, int toX, int toY) {
+        boolean success = false;
+        //check to make sure movement is not greater than 1 and not diagnal
+        if(Math.abs(fromX - toX) > 1 ||  Math.abs(fromY- toY) > 1 || Math.abs(fromY- toY) >= 1 && Math.abs(fromX - toX) >= 1 ){
+            return false;
+        }
+        else {
+            if (board[fromX][fromY].move(board[toX][toY])) {
+                //Attack
+                if (board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
+                    //If piece attacking is successful
+                    if (board[fromX][fromY].attack(board[toX][toY])) {
+                        board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
+                        board[fromX][fromY] = null;
+                        success = true;
+                    }
+                    //If piece defending is successful
+                    else {
+                        board[fromX][fromY] = null;
+                    }
+                    success = true;
+                }
+                //Move
+                else {
+                    board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
+                    board[fromX][fromY] = null;
+                    success = true;
+                }
+            }
+        }
+            return success;
     }
 
 
+
+
+/*
     public int[][] move(int sCol, int sRow, int fCol, int fRow){
         //Check initial spot
 
@@ -300,7 +339,7 @@ public class GameState {
         }
         return board;
     }
-
+*/
     @Override
     public String toString(){
         String finalMessage;
