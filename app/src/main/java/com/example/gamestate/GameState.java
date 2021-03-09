@@ -92,7 +92,7 @@ public class GameState {
      * @param original
      */
     public GameState(GameState original){
-        /*
+
         //make new array for the board
         board = new Piece[10][10];
 
@@ -100,11 +100,13 @@ public class GameState {
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++){
 
-                if(board[i][j] > 11 && turn == 0){ //If it's blue's piece on red's turn, value is -3
-                    board[i][j] = -3;
-                }else if(board[i][j] < 12 && turn == 1){ //If it's red's piece on blue's turn,
-                                                         // value is -3
-                    board[i][j] = -3;
+                //If it's blue's turn and the piece is red, make red piece invisible
+                if(board[i][j].getPlayer() == 1 && turn == 0){
+                    board[i][j].setVisible(false);
+                }
+                //if it's red's turn and the piece is blue, make blue piece invisible
+                else if(board[i][j].getPlayer() == 0 && turn == 1){
+                    board[i][j].setVisible(false);
                 }else{ //print the rest of the board state
                     board[i][j] = original.board[i][j];
                 }
@@ -116,7 +118,7 @@ public class GameState {
         timer = original.timer;
         phase = original.phase;
 
-         */
+
     }
 
     public boolean action(int fromX, int fromY, int toX, int toY) {
@@ -267,5 +269,25 @@ public class GameState {
                 "\n\n";
 
         return finalMessage;
+    }
+
+    public boolean endTurn(int turn) {
+        boolean isTrue = false;
+        // Player 1 (represented by 0) ended turn
+         if (turn == 0) {
+             turn = 1;
+             isTrue = true;
+         }
+         // Player 2 (represented by 1) ended turn
+         else if (turn == 1){
+             turn = 0;
+             isTrue = true;
+        }
+         // Handle Errors
+         // Return false, so the action is invalid
+         else {
+             isTrue = false;
+         }
+         return isTrue;
     }
 }
