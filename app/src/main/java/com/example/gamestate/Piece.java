@@ -77,22 +77,21 @@ public class Piece {
     }
 
     public boolean attack(Piece toAttack){
+        boolean success = true;
         if(this.getValue() == 8 && toAttack.getValue() == -2){ //miner attacks bomb
-            return true;
         }
         else if(toAttack.getValue() == -2){
-            return false;
+            success =false;
         }
         else if(this.getValue() == 10  && toAttack.getValue() == 1){
-            return true;
+
         }
         else if(this.getValue() < toAttack.getValue()){
-            return true;
         }
         else if(this.getValue() > toAttack.getValue()){
-            return false;
+            success = false;
         }
-        return true;
+        return success;
     }
 
 }

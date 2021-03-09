@@ -184,15 +184,26 @@ public class GameState {
             if (board[fromX][fromY].move(board[toX][toY])) {
                 //Attack
                 if(board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
+                    //If pieces are the same value
+                    if(board[fromX][fromY].getValue() == board[toX][toY].getValue()){
+                        board[fromX][fromY] = null;
+                        board[toX][toY] = null;
+                        //Increase captured by both
+                        increaseCap(0,board[toX][toY].getValue(),board[toX][toY].getPlayer());
+                    }
                     //If piece attacking is successful
-                    if (board[fromX][fromY].attack(board[toX][toY])) {
+                    else if (board[fromX][fromY].attack(board[toX][toY])) {
                         board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
                         board[fromX][fromY] = null;
-                        success = true;
+                        //Increase num captured by attacker
+                        increaseCap(1,board[toX][toY].getValue(),board[toX][toY].getPlayer());
+
                     }
                     //If piece defending is successful
                     else {
                         board[fromX][fromY] = null;
+                        //Increase num captured by defender
+                        increaseCap(1,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
                     }
                     success = true;
                 }
@@ -291,4 +302,66 @@ public class GameState {
          }
          return isTrue;
     }
+    public void increaseCap(int w, int pieceValue, int player){
+        switch (w){
+            case 0:
+                switch(pieceValue) {
+                    case -1:
+                        blueCharacter[11] += 1;
+                        redCharacter[11] += 1;
+                        break;
+                    case -2:
+                        blueCharacter[10] += 1;
+                        redCharacter[10] += 1;
+                        break;
+                    case 10:
+                        blueCharacter[0] += 1;
+                        redCharacter[0] += 1;
+                        break;
+                    default:
+                        blueCharacter[pieceValue] += 1;
+                        redCharacter[pieceValue] += 1;
+                        break;
+                }
+                break;
+            case 1:
+                if(player == 1){
+                    switch(pieceValue) {
+                        case -1:
+                            blueCharacter[11] += 1;
+                            break;
+                        case -2:
+                            blueCharacter[10] += 1;
+                            break;
+                        case 10:
+                            blueCharacter[0] += 1;
+                            break;
+                        default:
+                            blueCharacter[pieceValue] += 1;
+                            break;
+                    }
+
+                }
+                else{
+                    switch(pieceValue) {
+                        case -1:
+                            redCharacter[11] += 1;
+                            break;
+                        case -2:
+                            redCharacter[10] += 1;
+                            break;
+                        case 10:
+                            redCharacter[0] += 1;
+                            break;
+                        default:
+                            redCharacter[pieceValue] += 1;
+                            break;
+                    }
+
+                }
+                break;
+        }
+
+    }
+
 }
