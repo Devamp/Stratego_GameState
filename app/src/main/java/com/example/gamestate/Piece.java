@@ -65,33 +65,33 @@ public class Piece {
 
     public boolean move(Piece toPlace){
         boolean toReturn = true;
-
-        //add if conditional for center lakes
-
-        //if the place where the piece is moving is null, it is empty
-        //and can't move there
-        if(toPlace == null){
-            toReturn = true;
-        }
         //if a piece tries to move onto a space that is occupied by a friendly piece, can't move
-        else if(this.getPlayer() == toPlace.getPlayer()){
+        if(this.getPlayer() == toPlace.getPlayer()){
             toReturn = false;
         }
-        else if((this.getPlayer()+1)%2 == toPlace.getPlayer()){
-            this.attack(toPlace);
-        }
+        //If lake cannot move there
         else if(toPlace.getPlayer() == -1){
             toReturn = false;
         }
-        else{
-            toReturn = true;
-        }
-
         return toReturn;
     }
 
     public boolean attack(Piece toAttack){
-
+        if(this.getValue() == 8 && toAttack.getValue() == -2){ //miner attacks bomb
+            return true;
+        }
+        else if(toAttack.getValue() == -2){
+            return false;
+        }
+        else if(this.getValue() == 10  && toAttack.getValue() == 1){
+            return true;
+        }
+        else if(this.getValue() < toAttack.getValue()){
+            return true;
+        }
+        else if(this.getValue() > toAttack.getValue()){
+            return false;
+        }
         return true;
     }
 
