@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * @author Gareth Rice
  * @author Devam Patel
+ * @author Caden Deutscher
  *
  * @version 3/21
  *
@@ -436,6 +437,7 @@ public class GameState {
          }
          return isTrue;
     }
+    
     public void increaseCap(int w, int pieceValue, int player){
         switch (w){
             case 0:

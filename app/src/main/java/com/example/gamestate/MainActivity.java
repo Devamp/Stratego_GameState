@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 /**
  * @author Gareth Rice
+ * @author Caden Deutscher
  *
  * @version 3/21
  *
