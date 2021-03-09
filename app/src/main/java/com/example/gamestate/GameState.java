@@ -100,16 +100,19 @@ public class GameState {
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++){
 
-                //If it's blue's turn and the piece is red, make red piece invisible
-                if(board[i][j].getPlayer() == 1 && turn == 0){
-                    board[i][j].setVisible(false);
+                if(board[i][j] != null) {
+                    //If it's blue's turn and the piece is red, make red piece invisible
+                    if (board[i][j].getPlayer() == 1 && turn == 0) {
+                        board[i][j].setVisible(false);
+                    }
+                    //if it's red's turn and the piece is blue, make blue piece invisible
+                    else if (board[i][j].getPlayer() == 0 && turn == 1) {
+                        board[i][j].setVisible(false);
+                    } else { //print the rest of the board state
+                        board[i][j] = original.board[i][j];
+                    }
                 }
-                //if it's red's turn and the piece is blue, make blue piece invisible
-                else if(board[i][j].getPlayer() == 0 && turn == 1){
-                    board[i][j].setVisible(false);
-                }else{ //print the rest of the board state
-                    board[i][j] = original.board[i][j];
-                }
+
             }
         }
 
