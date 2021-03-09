@@ -1,5 +1,7 @@
 package com.example.gamestate;
 
+import java.util.ArrayList;
+
 /**
  * @author Gareth Rice
  * @author Devam Patel
@@ -23,6 +25,9 @@ public class GameState {
     private float timer;
     //Phase Indicator
     private int phase;
+
+    ArrayList<Piece> redBench = new ArrayList<Piece>();
+    ArrayList<Piece> blueBench = new ArrayList<Piece>();
 
     /**
      * ctor
@@ -81,9 +86,6 @@ public class GameState {
         timer = 0;
         phase = 0; // 0 = placement, 1 = game, 2 = end play
 
-
-
-
     }
 
     /**
@@ -118,7 +120,139 @@ public class GameState {
         timer = original.timer;
         phase = original.phase;
 
+    }
 
+    /**
+     * Add instantiated pieces to array lists for both red and blue
+     *
+     * @param player
+     * @return
+     */
+    public boolean instancePieces(int player){
+        ArrayList<Piece> assign;
+        int[] numberPieces;
+        String name;
+
+        if(player == 0){
+            assign = redBench;
+            numberPieces = redCharacter;
+        }else{
+            assign = blueBench;
+            numberPieces = blueCharacter;
+        }
+
+        //iterate over the 12 types of pieces
+        for(int i = 0; i < 12; i++){
+            //need to instance all of the pieces
+            name = setName(i);
+
+            //go over the number of each particular piece and add an instanced piece to
+            //an array list
+            while(numberPieces[i] > 0){
+                //if the piece is flag or bomb, create special piece
+                if(i == 0 || i == 10){
+                    assign.add(new SpecialPiece(name, i, player));
+                }else{
+                    //we can add conditions to add spy, miner, and scout special pieces
+                    assign.add(new Piece(name, i, player));
+                }
+
+                numberPieces[i]--;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * setName sets the name of the piece about to be instantiated
+     *
+     * @param whichName
+     * @return
+     */
+    public String setName(int whichName){
+        String returnName;
+
+        //probably a poor way to get the name? Can use hashtable?
+        switch(whichName){
+            case 0:
+                returnName = "Flag";
+                break;
+            case 1:
+                returnName = "Marshall";
+                break;
+            case 2:
+                returnName = "General";
+                break;
+            case 3:
+                returnName = "Colonel";
+                break;
+            case 4:
+                returnName = "Major";
+                break;
+            case 5:
+                returnName = "Captain";
+                break;
+            case 6:
+                returnName = "Lieutenant";
+                break;
+            case 7:
+                returnName = "Sergeant";
+                break;
+            case 8:
+                returnName = "Miner";
+                break;
+            case 9:
+                returnName = "scout";
+                break;
+            case 10:
+                returnName = "bomb";
+                break;
+            case 11:
+                returnName = "spy";
+                break;
+            default:
+                returnName = "";
+                break;
+        }
+
+        return returnName;
+    }
+
+    /**
+     * place: Place the pieces from their respective arrayLists
+     *
+     * @return
+     */
+    public boolean place(int player){
+        int start;
+        int randomIndex;
+        ArrayList<Piece> currentArmy;
+
+        //place red pieces on bottom of board
+        if(player == 0){
+            start = 0;
+            currentArmy = redBench;
+        } else{
+            start = 6;
+            currentArmy = blueBench;
+        }
+
+        //iterate over the first 4, or last 4 rows depending on blue or red player
+        for(int i = start; i < start + 4; i++){
+            for(int j = 0; j < board[i].length; j++){
+                //set the index i j to a random piece from specific players arrayList of
+                //instantiated pieces
+                randomIndex = (int) (Math.random() * currentArmy.size());
+
+                //set that board index to the random index
+                board[i][j] = currentArmy.get(randomIndex);
+                //once placed from bench it should be removed as its now on the board
+                currentArmy.remove(randomIndex);
+            }
+        }
+
+        return true;
     }
 
     public boolean action(int fromX, int fromY, int toX, int toY) {
