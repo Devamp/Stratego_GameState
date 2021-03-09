@@ -86,6 +86,14 @@ public class GameState {
         timer = 0;
         phase = 0; // 0 = placement, 1 = game, 2 = end play
 
+        //when the game is first made, we need to instance pieces for player 1 and player 2
+        instancePieces(0);
+        instancePieces(1);
+
+        place(0);
+        place(1);
+
+
     }
 
     /**
