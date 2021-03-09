@@ -87,6 +87,14 @@ public class GameState {
         timer = 0;
         phase = 0; // 0 = placement, 1 = game, 2 = end play
 
+        //when the game is first made, we need to instance pieces for player 1 and player 2
+        instancePieces(0);
+        instancePieces(1);
+
+        place(0);
+        place(1);
+
+
     }
 
     /**
@@ -378,7 +386,20 @@ public class GameState {
             gamePhase = ""; //error
         }
 
+        String boardS = "";
+
         //print board
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++) {
+                if(board[i][j] != null){
+                    boardS += board[i][j];
+
+                } else {
+                    boardS += "[null]";
+                }
+            }
+                    boardS += "\n";
+        }
 
         //print blueCharacter count
         finalMessage =
@@ -413,6 +434,7 @@ public class GameState {
                 "\n" + "Colonel: " + blueCharacter[3] +
                 "\n" + "General: " + blueCharacter[2] +
                 "\n" + "Marshall: " + blueCharacter[1] +
+                        "\n" + "[" + boardS + "]" +
                 "\n\n";
 
         return finalMessage;
