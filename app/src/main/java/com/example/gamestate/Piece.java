@@ -16,6 +16,8 @@ public class Piece {
     //if the value is -2, it is a bomb
     private int value;
 
+    private boolean isVisible = true;
+
     public Piece(String name, int val, int player){
         this.name = name;
         this.value = val;
@@ -26,6 +28,14 @@ public class Piece {
     public String toString(){
         String toReturn = "P:" + player + ", N:" + name + ", V:" + value;
         return toReturn;
+    }
+
+    public void setVisible(boolean visible){
+        isVisible = visible;
+    }
+
+    public boolean getVisible(){
+        return isVisible;
     }
 
     public void setName(String name){
