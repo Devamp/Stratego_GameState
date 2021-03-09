@@ -121,11 +121,57 @@ public class GameState {
 
     public boolean action(int fromX, int fromY, int toX, int toY) {
         boolean success = false;
-        //check to make sure movement is not greater than 1 and not diagnal
-        if(Math.abs(fromX - toX) > 1 ||  Math.abs(fromY- toY) > 1 || Math.abs(fromY- toY) >= 1 && Math.abs(fromX - toX) >= 1 ){
+
+        //check to make sure movement is not greater than 1 and not diagonal
+        if(Math.abs(fromY- toY) >= 1 && Math.abs(fromX - toX) >= 1) {
             return false;
         }
-        else {
+        //If not 9
+        if((Math.abs(fromX - toX) > 1 ||  Math.abs(fromY- toY) > 1) &&  board[fromX][fromY].getValue() != 9){
+            return false;
+        }
+        //Check to make sure 9 only goes through empty spaces
+        else if(board[fromX][fromY].getValue() == 9){
+            if(fromX > toX){
+                for(int i = fromX - 1; i >= toX; i--){
+                    if(board[i][fromY] != null){
+                        //Invalid
+                        return false;
+                    }
+
+                }
+
+            }
+            else if(fromY > toY){
+                for(int i = fromY - 1; i >= toY; i--){
+                    if(board[fromX][i] != null){
+                        //Invalid
+                        return false;
+                    }
+
+                }
+
+            }
+            else if(fromY < toY){
+                for(int i = fromY + 1; i <= toY; i++){
+                    if(board[fromX][i] != null){
+                        //Invalid
+                        return false;
+                    }
+                }
+            }
+            else if(fromX < toX){
+            for(int i = fromX + 1; i <= toX; i++){
+                if(board[i][fromY] != null){
+                    //Invalid
+                    return false;
+                }
+            }
+
+
+            }
+        }
+
             if (board[fromX][fromY].move(board[toX][toY])) {
                 //Attack
                 if (board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
@@ -148,198 +194,9 @@ public class GameState {
                     success = true;
                 }
             }
-        }
             return success;
     }
 
-
-
-
-/*
-    public int[][] move(int sCol, int sRow, int fCol, int fRow){
-        //Check initial spot
-
-        //Check if is movable
-        if(board[sCol][sRow]%12 > 9  || board[sCol][sRow]%12 <0 ){
-            //INVALID
-            return null;
-        }
-        //Check if is your piece
-        else if(board[sCol][sRow] > 11 && turn == 0 || board[sCol][sRow] < 12 && turn == 1){
-            //INVALID
-            return null;
-        }
-        //Check if on board
-        else if(sCol > 9 || sRow > 9 || fCol > 9 || fRow > 9 || sCol < 0 || sRow < 0 || fCol < 0 || fRow < 0){
-            //INVALID
-            return null;
-        }
-
-        //Check final spot
-
-        //if not scout
-        if(board[sCol][sRow]%12  != 9){
-            //Check to make sure only one spot away
-            if(Math.abs(sCol - fCol) != 1 || Math.abs(sRow - fRow) != 1){
-                //INVALID
-                return null;
-            }
-            //Check to make sure not diagonal
-            else if(sCol != fCol && sRow != fRow){
-                //INVALID
-                return null;
-            }
-            //Check if empty
-            else if(board[fCol][fRow] != -1 ){
-                //INVALID
-                return null;
-            }
-        }
-        //if scout
-        else{
-            //Check to make sure not diagonal
-            if(sCol != fCol && sRow != fRow){
-                //INVALID
-                return null;
-            }
-            //Check if empty
-            else if(board[fCol][fRow] != -1 ){
-                //INVALID
-                return null;
-            }
-
-            //Check in between spots
-            if(fCol > sCol){
-                for(int i = sCol + 1; i <= fCol; i++) {
-                    if(board[i][sRow] != -1){
-                        //Invalid
-                        return null;
-                    }
-                }
-
-            }
-            else if(fCol < sCol){
-                for(int i = sCol -1; i >= fCol; i--){
-                    if(board[i][sRow] != -1){
-                        //Invalid
-                        return null;
-                    }
-
-                }
-
-            }
-            else if(fRow < sRow){
-                for(int i = sRow - 1; i >= fRow; i--){
-                    if(board[sCol][i] != -1){
-                        //Invalid
-                        return null;
-                    }
-
-                }
-
-            }
-            else if( fRow > sRow){
-                for(int i = sRow + 1; i <= fRow; i++){
-                    if(board[sCol][i] != -1){
-                        //Invalid
-                        return null;
-                    }
-                }
-            }
-        }
-
-        //Make Move
-        int temp =  board[sCol][sRow];
-        board[sCol][sRow] = -1;
-        board[fCol][fRow] = temp;
-
-        return board;
-    }
-
-    public int[][] attack(int sCol, int sRow, int fCol, int fRow) {
-        // CONDITION CHECKS
-        // check player turn
-        if (board[sCol][sRow] > 11 && turn == 0 || board[sCol][sRow] < 12 && turn == 1) {
-            return null;
-        }
-
-        // check out of bounds
-        else if(sCol > 9 || sRow > 9 || fCol > 9 || fRow > 9) {
-            return null;
-        }
-
-        //check friendly pieces
-        else if (board[sCol][sRow] > 11 && turn == 0) {
-            if (board[fCol][fRow] > 11) {
-                return null;
-            }
-        }
-        else if (board[sCol][sRow] < 12 && turn == 1) {
-            if (board[fCol][fRow] < 12) {
-                return null;
-            }
-        }
-
-        // ATTACK
-        // Bomb and flag cannot attack
-        if (board[sCol][sRow]%12 == 10 || board[sCol][sRow]%12 == 11) {
-            return null; //invalid
-        }
-        // Bomb Case with Miner
-        if (board[sCol][sRow]%12 == 8 && board[fCol][fRow]%12 == 10) {
-            board [sCol][sRow] = board[fCol][fRow];
-            board[fCol][fRow] = -1;
-        }
-        // Bomb case without Miner
-        if (board[sCol][sRow]%12 != 8 && board[fCol][fRow]%12 == 10) {
-            board[sCol][sRow] = -1;
-        }
-        // Spy attack Marshall
-        if (board[sCol][sRow]%12 == 0 && board[fCol][fRow]%12 == 1) {
-            board [sCol][sRow] = board[fCol][fRow];
-            board[fCol][fRow] = -1;
-        }
-        // Marshall attack Spy
-        if (board[sCol][sRow]%12 == 1 && board[fCol][fRow]%12 == 0) {
-            board [sCol][sRow] = board[fCol][fRow];
-            board[fCol][fRow] = -1;
-        }
-
-        //spy tries attacking other pieces
-        if (board[sCol][sRow]%12 == 0 && board[fCol][fRow]%12 != 1) {
-            board[sCol][sRow] = -1;
-        }
-
-        // Other pieces try attacking Spy
-        if (board[sCol][sRow]%12 != 0 && board[fCol][fRow]%12 == 1) {
-            board[sCol][sRow] = board[fCol][fRow];
-            board[fCol][fRow] = -1; ;
-        }
-
-        // pieces are the same
-        if (board[sCol][sRow]%12 == board[fCol][fRow]%12) {
-            board[sCol][sRow] = -1;
-            board[fCol][fRow] = -1;
-        }
-
-        // all movable pieces capture flag
-        if (board[fCol][fRow]%12 == 11) {
-            board [sCol][sRow] = board[fCol][fRow];
-            board[fCol][fRow] = -1;
-        }
-
-        // successful attack (negate spy)
-        if (board[sCol][sRow]%12 < board[fCol][fRow]%12 && board[sCol][sRow]%12 != 0) {
-            board[sCol][sRow] = board[fCol][fRow];
-            board[fCol][fRow] = -1;
-        }
-        // unsuccessful attack (negate spy)
-        if (board[sCol][sRow]%12 > board[fCol][fRow]%12 && board[fCol][fRow]%12 != 0) {
-            board[sCol][sRow] = -1;
-        }
-        return board;
-    }
-*/
 
     //toString method print current state of the game as a String
     @Override
