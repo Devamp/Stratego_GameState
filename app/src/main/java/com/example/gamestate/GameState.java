@@ -226,12 +226,6 @@ public class GameState {
         }
 
         //print board
-        for(int row = 0; row < board.length; row++){
-            for(int col = 0; col < board[row].length; col++){
-                System.out.print("["+ board[row][col] + "]" + "\t");
-            }
-            System.out.println();
-        }
 
         //print blueCharacter count
         finalMessage =
