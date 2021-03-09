@@ -15,7 +15,7 @@ public class SpecialPiece extends Piece {
     }
 
     @Override
-    public boolean attack(Piece Attacking, Piece toAttack){
+    public boolean attack( Piece toAttack){
         return false;
     }
 

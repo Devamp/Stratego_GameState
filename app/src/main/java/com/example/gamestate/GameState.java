@@ -122,8 +122,12 @@ public class GameState {
     }
 
     public boolean action(int fromX, int fromY, int toX, int toY) {
+
         boolean success = false;
 
+        if(board[fromX][fromY] == null){
+            return false;
+        }
         //check to make sure movement is not greater than 1 and not diagonal
         if(Math.abs(fromY- toY) >= 1 && Math.abs(fromX - toX) >= 1) {
             return false;
@@ -176,7 +180,7 @@ public class GameState {
 
             if (board[fromX][fromY].move(board[toX][toY])) {
                 //Attack
-                if (board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
+                if(board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
                     //If piece attacking is successful
                     if (board[fromX][fromY].attack(board[toX][toY])) {
                         board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
