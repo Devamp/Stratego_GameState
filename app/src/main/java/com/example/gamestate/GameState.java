@@ -100,16 +100,19 @@ public class GameState {
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++){
 
-                //If it's blue's turn and the piece is red, make red piece invisible
-                if(board[i][j].getPlayer() == 1 && turn == 0){
-                    board[i][j].setVisible(false);
+                if(board[i][j] != null) {
+                    //If it's blue's turn and the piece is red, make red piece invisible
+                    if (board[i][j].getPlayer() == 1 && turn == 0) {
+                        board[i][j].setVisible(false);
+                    }
+                    //if it's red's turn and the piece is blue, make blue piece invisible
+                    else if (board[i][j].getPlayer() == 0 && turn == 1) {
+                        board[i][j].setVisible(false);
+                    } else { //print the rest of the board state
+                        board[i][j] = original.board[i][j];
+                    }
                 }
-                //if it's red's turn and the piece is blue, make blue piece invisible
-                else if(board[i][j].getPlayer() == 0 && turn == 1){
-                    board[i][j].setVisible(false);
-                }else{ //print the rest of the board state
-                    board[i][j] = original.board[i][j];
-                }
+
             }
         }
 
@@ -230,12 +233,6 @@ public class GameState {
         }
 
         //print board
-        for(int row = 0; row < board.length; row++){
-            for(int col = 0; col < board[row].length; col++){
-                System.out.print("["+ board[row][col] + "]" + "\t");
-            }
-            System.out.println();
-        }
 
         //print blueCharacter count
         finalMessage =
@@ -275,16 +272,16 @@ public class GameState {
         return finalMessage;
     }
 
-    public boolean endTurn(int turn) {
+    public boolean endTurn(GameState gameState) {
         boolean isTrue = false;
         // Player 1 (represented by 0) ended turn
-         if (turn == 0) {
-             turn = 1;
+         if (gameState.turn == 0) {
+             gameState.turn = 1;
              isTrue = true;
          }
          // Player 2 (represented by 1) ended turn
-         else if (turn == 1){
-             turn = 0;
+         else if (gameState.turn == 1){
+             gameState.turn = 0;
              isTrue = true;
         }
          // Handle Errors

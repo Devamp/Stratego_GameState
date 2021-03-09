@@ -77,7 +77,7 @@ public class Piece {
     }
 
     public boolean attack(Piece toAttack){
-        if(this.getValue() == 8 && toAttack.getValue() == -2){
+        if(this.getValue() == 8 && toAttack.getValue() == -2){ //miner attacks bomb
             return true;
         }
         else if(toAttack.getValue() == -2){
