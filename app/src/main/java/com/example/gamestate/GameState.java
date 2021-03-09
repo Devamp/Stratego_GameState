@@ -18,7 +18,7 @@ public class GameState {
     //turn indicator // red = 0, blue = 1
     private int turn;
     //Board: -1 = empty space, -2 = impassable space (lake), -3 = invisible character (other army)
-    private int[][] board;
+    private Piece[][] board;
     //Game Timer
     private float timer;
     //Phase Indicator
@@ -34,18 +34,18 @@ public class GameState {
         blueCharacter = new int[12];
 
         //Initialize red values
-        redCharacter[0] = 1;
-        redCharacter[1] = 1;
-        redCharacter[2] = 1;
-        redCharacter[3] = 2;
-        redCharacter[4] = 3;
-        redCharacter[5] = 4;
-        redCharacter[6] = 4;
-        redCharacter[7] = 4;
-        redCharacter[8] = 5;
-        redCharacter[9] = 8;
-        redCharacter[10] = 6;
-        redCharacter[11] = 1;
+        redCharacter[0] = 1; //flag
+        redCharacter[1] = 1; //marshall
+        redCharacter[2] = 1; //general
+        redCharacter[3] = 2; //colonel
+        redCharacter[4] = 3; //major
+        redCharacter[5] = 4; //captain
+        redCharacter[6] = 4; //Lieutenant
+        redCharacter[7] = 4; //sergeant
+        redCharacter[8] = 5; //miner
+        redCharacter[9] = 8; //scout
+        redCharacter[10] = 6; //bomb
+        redCharacter[11] = 1; //spy
 
         //Initialize blue values
         blueCharacter[0] = 1;
@@ -65,15 +65,15 @@ public class GameState {
         turn = 0;
 
         //initialize board array with -1 in all empty slots
-        board = new int[10][10];
+        board = new Piece[10][10];
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++){
                 //Make the lakes in the center of the board equal -2. Spaces with -2 can't
                 //be crossed/moved into
                 if((i == 4 || i == 5) && (j == 2 || j == 3 || j == 6 || j == 7)){
-                    board[i][j] = -2;
+                    board[i][j] = new Piece("Lake",-1,-1);
                 }else{
-                    board[i][j] = -1;
+                    board[i][j] = null;
                 }
             }
         }
@@ -92,8 +92,9 @@ public class GameState {
      * @param original
      */
     public GameState(GameState original){
+        /*
         //make new array for the board
-        board = new int[10][10];
+        board = new Piece[10][10];
 
         //set the new board state equal to original board state
         for(int i = 0; i < board.length; i++){
@@ -114,9 +115,47 @@ public class GameState {
         turn = original.turn;
         timer = original.timer;
         phase = original.phase;
+
+         */
+    }
+
+    public boolean action(int fromX, int fromY, int toX, int toY) {
+        boolean success = false;
+        //check to make sure movement is not greater than 1 and not diagnal
+        if(Math.abs(fromX - toX) > 1 ||  Math.abs(fromY- toY) > 1 || Math.abs(fromY- toY) >= 1 && Math.abs(fromX - toX) >= 1 ){
+            return false;
+        }
+        else {
+            if (board[fromX][fromY].move(board[toX][toY])) {
+                //Attack
+                if (board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
+                    //If piece attacking is successful
+                    if (board[fromX][fromY].attack(board[toX][toY])) {
+                        board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
+                        board[fromX][fromY] = null;
+                        success = true;
+                    }
+                    //If piece defending is successful
+                    else {
+                        board[fromX][fromY] = null;
+                    }
+                    success = true;
+                }
+                //Move
+                else {
+                    board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
+                    board[fromX][fromY] = null;
+                    success = true;
+                }
+            }
+        }
+            return success;
     }
 
 
+
+
+/*
     public int[][] move(int sCol, int sRow, int fCol, int fRow){
         //Check initial spot
 
@@ -300,7 +339,9 @@ public class GameState {
         }
         return board;
     }
+*/
 
+    //toString method print current state of the game as a String
     @Override
     public String toString(){
         String finalMessage;
@@ -325,7 +366,6 @@ public class GameState {
             gamePhase = ""; //error
         }
 
-
         //print board
         for(int row = 0; row < board.length; row++){
             for(int col = 0; col < board[row].length; col++){
@@ -334,33 +374,40 @@ public class GameState {
             System.out.println();
         }
 
-        //print redCharacter count
-        String redTroops;
-        for(int i = 0; i < redCharacter.length; i++){
-
-        }
-
         //print blueCharacter count
-        finalMessage = "********** GAME STATE INFO ********** " +
+        finalMessage =
+                "********** GAME STATE INFO ********** " +
                 "\n Player Turn: " + player +
                 "\n Game Time: " + timer +
                 "\n Current Game Phase: " + gamePhase +
-                "\n\n" + " Red Player Characters: " +
-                "\n" + "Flag: " +
-                "\n" + "Bomb: " +
-                "\n" + "Spy: " +
-                "\n" + "Scout: " +
-                "\n" + "Miner: " +
-                "\n" + "Sergeant: " +
-                "\n" + "Lieutenant: " +
-                "\n" + "Captain: " +
-                "\n" + "Major: " +
-                "\n" + "Colonel: " +
-                "\n" + "General: " +
-                "\n" + "Marshall: " +
+                "\n\n" + "Red Player Characters: " +
+                "\n" + "Flag: " + redCharacter[0] +
+                "\n" + "Bomb: " + redCharacter[10] +
+                "\n" + "Spy: " + redCharacter[11] +
+                "\n" + "Scout: " + redCharacter[9] +
+                "\n" + "Miner: " + redCharacter[8] +
+                "\n" + "Sergeant: " + redCharacter[7] +
+                "\n" + "Lieutenant: " + redCharacter[6] +
+                "\n" + "Captain: " + redCharacter[5] +
+                "\n" + "Major: " + redCharacter[4] +
+                "\n" + "Colonel: " + redCharacter[3] +
+                "\n" + "General: " + redCharacter[2] +
+                "\n" + "Marshall: " + redCharacter[1] +
 
-                "\n\n" + " Blue Player Characters: " +
-                "\n\n" ;
+                "\n\n" + "Blue Player Characters: " +
+                "\n" + "Flag: " + blueCharacter[0] +
+                "\n" + "Bomb: " + blueCharacter[10] +
+                "\n" + "Spy: " + blueCharacter[11] +
+                "\n" + "Scout: " + blueCharacter[9] +
+                "\n" + "Miner: " + blueCharacter[8] +
+                "\n" + "Sergeant: " + blueCharacter[7] +
+                "\n" + "Lieutenant: " + blueCharacter[6] +
+                "\n" + "Captain: " + blueCharacter[5] +
+                "\n" + "Major: " + blueCharacter[4] +
+                "\n" + "Colonel: " + blueCharacter[3] +
+                "\n" + "General: " + blueCharacter[2] +
+                "\n" + "Marshall: " + blueCharacter[1] +
+                "\n\n";
 
         return finalMessage;
     }
