@@ -45,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
                 GameState firstInstance = new GameState();
 
+                GameState secondInstance = new GameState(firstInstance);
+
+                GameState thirdInstance = new GameState();
+
+                GameState fourthInstance = new GameState(thirdInstance);
+
                 //call toString
                 String toString = firstInstance.toString();
                 mainText.setText(toString);
