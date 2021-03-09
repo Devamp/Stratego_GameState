@@ -265,16 +265,16 @@ public class GameState {
         return finalMessage;
     }
 
-    public boolean endTurn(int turn) {
+    public boolean endTurn(GameState gameState) {
         boolean isTrue = false;
         // Player 1 (represented by 0) ended turn
-         if (turn == 0) {
-             turn = 1;
+         if (gameState.turn == 0) {
+             gameState.turn = 1;
              isTrue = true;
          }
          // Player 2 (represented by 1) ended turn
-         else if (turn == 1){
-             turn = 0;
+         else if (gameState.turn == 1){
+             gameState.turn = 0;
              isTrue = true;
         }
          // Handle Errors
