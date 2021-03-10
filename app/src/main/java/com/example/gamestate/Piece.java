@@ -27,7 +27,13 @@ public class Piece {
     }
 
     public String toString(){
-        String toReturn = "P:" + player + ", N:" + name + ", V:" + value;
+        String toReturn;
+        if(isVisible){
+            toReturn = "P:" + player + ", N:" + name + ", V:" + value;
+        }else{
+            toReturn = "INV";
+        }
+
         return toReturn;
     }
 
