@@ -47,10 +47,13 @@ public class MainActivity extends AppCompatActivity {
                 GameState firstInstance = new GameState();
 
                 GameState secondInstance = new GameState(firstInstance);
+                //First move go here
 
-                GameState thirdInstance = new GameState();
+                GameState thirdInstance = new GameState(secondInstance);
+                //Second move goes here
 
                 GameState fourthInstance = new GameState(thirdInstance);
+                //third move goes here
 
                 //call toString
                 String toString = firstInstance.toString();
