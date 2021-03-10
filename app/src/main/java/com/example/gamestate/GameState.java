@@ -70,7 +70,7 @@ public class GameState {
         //initialize other values
         turn = 0;
 
-        //initialize board array with -1 in all empty slots
+        //initialize board array with null in all empty spots
         board = new Piece[10][10];
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++){
@@ -110,6 +110,23 @@ public class GameState {
         //set the new board state equal to original board state
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++){
+                //assign board[i][j] before null check
+
+                //create a deep copy of each piece
+                if(original.board[i][j] != null) {
+                    //need to create a special piece if it's a bomb or flag
+                    if(original.board[i][j].getName().equals("Bomb") || original.board[i][j].getName().equals("Flag")) {
+                        board[i][j] = new SpecialPiece(original.board[i][j].getName(), original.board[i][j].getValue(), original.board[i][j].getPlayer());
+                        board[i][j].setVisible(original.board[i][j].getVisible());
+                    }
+                    //need to create normal piece otherwise
+                    else {
+                        board[i][j] = new Piece(original.board[i][j].getName(), original.board[i][j].getValue(), original.board[i][j].getPlayer());
+                        board[i][j].setVisible(original.board[i][j].getVisible());
+                    }
+                }else{
+                    board[i][j] = null;
+                }
 
                 if(board[i][j] != null) {
                     //If it's blue's turn and the piece is red, make red piece invisible
@@ -119,8 +136,8 @@ public class GameState {
                     //if it's red's turn and the piece is blue, make blue piece invisible
                     else if (board[i][j].getPlayer() == 0 && turn == 1) {
                         board[i][j].setVisible(false);
-                    } else { //print the rest of the board state
-                        board[i][j] = original.board[i][j];
+                    } else { //assign the rest of the board state
+                        board[i][j].setVisible(true);
                     }
                 }
 
@@ -131,6 +148,11 @@ public class GameState {
         turn = original.turn;
         timer = original.timer;
         phase = original.phase;
+
+        blueCharacter = original.blueCharacter;
+        redCharacter = original.redCharacter;
+        blueBench = original.blueBench;
+        redBench = original.redBench;
 
     }
 
@@ -243,10 +265,10 @@ public class GameState {
 
         //place red pieces on bottom of board
         if(player == 0){
-            start = 0;
+            start = 6;
             currentArmy = redBench;
         } else{
-            start = 6;
+            start = 0;
             currentArmy = blueBench;
         }
 

@@ -53,13 +53,10 @@ public class MainActivity extends AppCompatActivity {
                 GameState fourthInstance = new GameState(thirdInstance);
 
                 //call toString
-                if(firstInstance.action(0,3,0,4)) {
-                    String toString = firstInstance.toString();
-                    mainText.setText(toString);
-                    mainText.append(spy.toString());
-                }
-
-
+                String ogBoard = firstInstance.toString();
+                String toString = secondInstance.toString();
+                mainText.setText(ogBoard);
+                mainText.append(toString);
             }
         });
     }
