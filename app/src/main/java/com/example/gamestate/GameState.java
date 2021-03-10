@@ -346,8 +346,14 @@ public class GameState {
         }
 
             if (board[fromX][fromY].move(board[toX][toY])) {
+                //Move(prevents null pointer exception)
+                if(board[toX][toY] == null){
+                    board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
+                    board[fromX][fromY] = null;
+                    success = true;
+                }
                 //Attack
-                if(board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
+                else if(board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
                     //If pieces are the same value
                     if(board[fromX][fromY].getValue() == board[toX][toY].getValue()){
                         board[fromX][fromY] = null;

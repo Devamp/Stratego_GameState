@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 GameState fourthInstance = new GameState(thirdInstance);
 
                 //call toString
+                firstInstance.action(6,0,5,0);
                 String ogBoard = firstInstance.toString();
                 String toString = secondInstance.toString();
                 mainText.setText(ogBoard);
