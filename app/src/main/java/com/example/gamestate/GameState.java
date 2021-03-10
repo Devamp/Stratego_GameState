@@ -275,7 +275,7 @@ public class GameState {
             return false;
         }
         //check to make sure movement is not greater than 1 and not diagonal
-        if(Math.abs(fromY- toY) >= 1 && Math.abs(fromX - toX) >= 1) {
+        if(Math.abs(fromY-toY) >= 1 && Math.abs(fromX - toX) >= 1) {
             return false;
         }
         //If not 9
@@ -290,7 +290,6 @@ public class GameState {
                         //Invalid
                         return false;
                     }
-
                 }
 
             }

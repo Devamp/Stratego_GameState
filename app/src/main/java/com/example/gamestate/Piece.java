@@ -66,6 +66,10 @@ public class Piece {
 
     public boolean move(Piece toPlace){
         boolean toReturn = true;
+
+        if(toPlace == null){
+            return true;
+        }
         //if a piece tries to move onto a space that is occupied by a friendly piece, can't move
         if(this.getPlayer() == toPlace.getPlayer()){
             toReturn = false;
