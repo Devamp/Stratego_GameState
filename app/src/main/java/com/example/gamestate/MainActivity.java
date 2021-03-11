@@ -55,31 +55,39 @@ public class MainActivity extends AppCompatActivity {
                 GameState fourthInstance = new GameState(thirdInstance);
 
                 //call toString
-                secondInstance.action(6,0,5,0);
-                mainText.append("Player 1 tries to move piece from (6,0) to (5,0)\n");
-                mainText.append("\n");
+                mainText.append(secondInstance.movePrint(6,0,5,0));
+                mainText.append("\n\n");
                 mainText.append(secondInstance.printBoard());
                 mainText.append("\n");
 
-                secondInstance.action(5,0,5,1);
-                mainText.append("Player 1 tries to move piece from (5,0) to (5,1)\n");
-                mainText.append("\n");
+                mainText.append(secondInstance.movePrint(5,0,5,1));
+                mainText.append("\n\n");
                 mainText.append(secondInstance.printBoard());
                 mainText.append("\n");
 
-                secondInstance.action(5,1,5,2);
-                mainText.append("Player 1 tries to move piece from (5,1) to (5,2)\n\n");
+                mainText.append(secondInstance.movePrint(5,1,5,2));
+                mainText.append("\n\n");
                 mainText.append(secondInstance.printBoard());
                 mainText.append("\n");
-
-                mainText.append("Player 1 tries to move piece from (5,1) to (5,2)\n\n");
                 //Diagonal test should never work
-                secondInstance.action(6,9,5,8);
+                mainText.append(secondInstance.movePrint(6,9,5,8));
+                mainText.append("\n\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
                 //Multi-space move test should work for scout
-                secondInstance.action(6,8,4,8);
+                mainText.append(secondInstance.movePrint(6,8,4,8));
+                mainText.append("\n\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
                 //take test(should work unless bomb or flag)
-                secondInstance.action(6,5,5,5);
-                secondInstance.action(6,5,4,5);
+                mainText.append(secondInstance.movePrint(6,5,5,5));
+                mainText.append("\n\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
+                mainText.append(secondInstance.movePrint(6,5,4,5));
+                mainText.append("\n\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
 
 
                 String ogBoard = firstInstance.toString();
