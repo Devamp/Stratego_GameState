@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.nio.charset.MalformedInputException;
+
 /**
  * @author Gareth Rice
  * @author Caden Deutscher
@@ -89,11 +91,17 @@ public class MainActivity extends AppCompatActivity {
                 mainText.append(secondInstance.printBoard());
                 mainText.append("\n");
 
+                mainText.append("\n");
+                mainText.append("[SECOND INSTANCE]");
+                mainText.append("\n");
+                mainText.append(secondInstance.toString());
 
-                String ogBoard = firstInstance.toString();
-                String toString = secondInstance.toString();
-                mainText.append(ogBoard);
-                mainText.append(toString);
+                mainText.append("\n");
+                mainText.append("[FOURTH INSTANCE]");
+                mainText.append("\n");
+                mainText.append(fourthInstance.toString());
+
+
             }
         });
     }
