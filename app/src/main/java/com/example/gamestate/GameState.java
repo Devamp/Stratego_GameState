@@ -290,7 +290,7 @@ public class GameState {
     }
 
     public boolean action(int fromX, int fromY, int toX, int toY) {
-
+        int whoseE = (turn +1)%2;
         boolean success = false;
 
         if(board[fromX][fromY] == null){
@@ -357,15 +357,15 @@ public class GameState {
                     //If pieces are the same value
                     if(board[fromX][fromY].getValue() == board[toX][toY].getValue()){
                         //Increase captured by both
-                        increaseCap(0,board[toX][toY].getValue(),board[toX][toY].getPlayer());
-                        increaseCap(0,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
+                        increaseCap(whoseE,board[toX][toY].getValue(),board[toX][toY].getPlayer());
+                        increaseCap(turn,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
                         board[fromX][fromY] = null;
                         board[toX][toY] = null;
                     }
                     //If piece attacking is successful
                     else if (board[fromX][fromY].attack(board[toX][toY])) {
                         //Increase num captured by attacker
-                        increaseCap(1,board[toX][toY].getValue(),board[toX][toY].getPlayer());
+                        increaseCap(whoseE,board[toX][toY].getValue(),board[toX][toY].getPlayer());
                         board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
                         board[fromX][fromY] = null;
 
@@ -373,7 +373,7 @@ public class GameState {
                     //If piece defending is successful
                     else {
                         //Increase num captured by defender
-                        increaseCap(1,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
+                        increaseCap(turn,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
                         board[fromX][fromY] = null;
                     }
                     success = true;
@@ -493,19 +493,15 @@ public class GameState {
             case 0:
                 switch(pieceValue) {
                     case -1:
-                        blueCharacter[11] += 1;
                         redCharacter[11] += 1;
                         break;
                     case -2:
-                        blueCharacter[10] += 1;
                         redCharacter[10] += 1;
                         break;
                     case 10:
-                        blueCharacter[0] += 1;
                         redCharacter[0] += 1;
                         break;
                     default:
-                        blueCharacter[pieceValue] += 1;
                         redCharacter[pieceValue] += 1;
                         break;
                 }
