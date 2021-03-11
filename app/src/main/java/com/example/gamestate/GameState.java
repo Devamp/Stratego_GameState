@@ -290,6 +290,15 @@ public class GameState {
         return true;
     }
 
+    /**
+     * placeRemove: places a single piece or removes a single piece
+     *
+     * @param player - whose player it is
+     * @param value - what the piece value is
+     * @param row - row to place piece
+     * @param col- col to place piece
+     * @return returns true if piece is removed or placed, false if failure
+     */
     public boolean placeRemove(int player, int value, int row, int col){
         if(phase == 0){
             if(board[row][col] == null){
@@ -357,6 +366,15 @@ public class GameState {
 
     }
 
+    /**
+     * action: Preforms the attack and move methods depending on the situation
+     *
+     * @param fromX - row of starting piece
+     * @param fromY - col of starting piece
+     * @param toX - row of where you are placing piece
+     * @param toY- col of where you are placing piece
+     * @return boolean - true if success, false if failure
+     */
     public boolean action(int fromX, int fromY, int toX, int toY) {
         int whoseE = (turn +1)%2;
         boolean success = false;
@@ -456,7 +474,6 @@ public class GameState {
             return success;
     }
 
-
     //toString method print current state of the game as a String
     @Override
     public String toString(){
@@ -555,9 +572,15 @@ public class GameState {
          }
          return isTrue;
     }
-    
-    public void increaseCap(int w, int pieceValue){
-        switch (w){
+
+    /**
+     *increaseCap - increase the captured pieces of the pieceValue type
+     *
+     * @param player - player whose playing
+     * @param pieceValue - value of piece being removed
+     */
+    public void increaseCap(int player, int pieceValue){
+        switch (player){
             case 0:
                         redCharacter[pieceValue] += 1;
                 break;

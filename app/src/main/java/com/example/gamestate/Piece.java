@@ -74,7 +74,12 @@ public class Piece {
 
     public boolean move(Piece toPlace){
         boolean toReturn = true;
-        if(this.getValue() == 0 || this.getValue() == 10){
+        //don't move bomb or flag
+        if(this.getValue() <= 0 || this.getValue() == 10 || this.getPlayer() < 0){
+            return false;
+        }
+        //Don't move on lake
+        if(toPlace.getPlayer() < 0 || toPlace.getPlayer() < 0){
             return false;
         }
         if(toPlace == null){
