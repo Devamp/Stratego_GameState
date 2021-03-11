@@ -358,12 +358,13 @@ public class GameState {
                 //Attack
                 else if(board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
                     //If pieces are the same value
-                    if(board[fromX][fromY].getValue() == board[toX][toY].getValue() && board[fromX][fromY].getValue() != 9){
+                    if(board[fromX][fromY].getValue() == board[toX][toY].getValue()){
                         //Increase captured by both
                         increaseCap(whoseE,board[toX][toY].getValue());
                         increaseCap(turn,board[fromX][fromY].getValue());
                         board[fromX][fromY] = null;
                         board[toX][toY] = null;
+                        return true;
                     }
                     //If piece attacking is successful
                     else if (board[fromX][fromY].attack(board[toX][toY])) {
@@ -551,18 +552,18 @@ public class GameState {
 
         boolean attacking = false;
         if(board[row][col] == null) {
-            return null;
+            return "No piece to move at this location";
         }
 
         String piece1 = setName(board[row][col].getValue());
 
-
         if(board[frow][fcol] != null){
             attacking = true;
         }
+
         if(this.action(row,col,frow,fcol)){
             if(attacking){
-                return piece1 + " at (" + row + "," + col + ") attacked"  +  " piece at (" + frow + "," + fcol + ") and the movement was successful!";
+                return piece1 + " at (" + row + "," + col + ") attacked piece at (" + frow + "," + fcol + ") and the movement was successful!";
             }
             else{
                 return piece1 + " at (" + row + "," + col + ") moved to (" + frow + "," + fcol + ") and the movement was successful!";

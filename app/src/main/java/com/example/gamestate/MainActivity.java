@@ -86,7 +86,11 @@ public class MainActivity extends AppCompatActivity {
                 mainText.append("\n\n");
                 mainText.append(secondInstance.printBoard());
                 mainText.append("\n");
-                mainText.append(secondInstance.movePrint(6,5,4,5));
+                mainText.append(secondInstance.movePrint(5,5,4,5));
+                mainText.append("\n\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
+                mainText.append(secondInstance.movePrint(4,5,3,5));
                 mainText.append("\n\n");
                 mainText.append(secondInstance.printBoard());
                 mainText.append("\n");
