@@ -11,6 +11,7 @@ import android.widget.EditText;
  * @author Gareth Rice
  * @author Caden Deutscher
  * @author Hewlett De Lara
+ * @author Devam Patel
  *
  * @version 3/21
  *
@@ -54,9 +55,10 @@ public class MainActivity extends AppCompatActivity {
                 GameState fourthInstance = new GameState(thirdInstance);
 
                 //call toString
-                secondInstance.action(6,0,5,0);
-                secondInstance.action(5,0,4,0);
+                secondInstance.action(6,0,5,1);
+                secondInstance.action(5,1,5,2);
                 secondInstance.action(4,0,3,0);
+
                 String ogBoard = firstInstance.toString();
                 String toString = secondInstance.toString();
                 mainText.setText(ogBoard);

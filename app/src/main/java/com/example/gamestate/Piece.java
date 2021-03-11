@@ -4,6 +4,7 @@ package com.example.gamestate;
  * @author Gareth Rice
  * @author Caden Deutscher
  * @author Hewlett De Lara
+ * @author Devam Patel
  *
  * @version 3/21
  */
@@ -79,7 +80,7 @@ public class Piece {
             return false;
         }
         //Don't move on lake
-        if(toPlace.getPlayer() < 0 || toPlace.getPlayer() < 0){
+        if(toPlace.getPlayer() < 0 || toPlace.value < 0){
             return false;
         }
         if(toPlace == null){

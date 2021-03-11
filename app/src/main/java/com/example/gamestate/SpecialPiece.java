@@ -1,5 +1,13 @@
 package com.example.gamestate;
 
+/**
+ * @author Gareth Rice
+ * @author Caden Deutscher
+ * @author Hewlett De Lara
+ * @author Devam Patel
+ *
+ * @version 3/21
+ */
 
 
 public class SpecialPiece extends Piece {
