@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.nio.charset.MalformedInputException;
+
 /**
  * @author Gareth Rice
  * @author Caden Deutscher
@@ -68,14 +70,22 @@ public class MainActivity extends AppCompatActivity {
                 mainText.append("\n");
 
                 secondInstance.action(5,1,5,2);
-                mainText.append("Player 1 tries to move piece from (5,1) to (5,2)\n\n");
+                mainText.append("Player 1 tries to move piece from (5,1) to (5,2)\n");
+                mainText.append("But fails to do so because it moving onto a lake is an INVALID move.\n\n");
                 mainText.append(secondInstance.printBoard());
                 mainText.append("\n");
 
-                String ogBoard = firstInstance.toString();
-                String toString = secondInstance.toString();
-                mainText.append(ogBoard);
-                mainText.append(toString);
+                mainText.append("\n");
+                mainText.append("[SECOND INSTANCE]");
+                mainText.append("\n");
+                mainText.append(secondInstance.toString());
+
+                mainText.append("\n");
+                mainText.append("[FOURTH INSTANCE]");
+                mainText.append("\n");
+                mainText.append(fourthInstance.toString());
+
+
             }
         });
     }
