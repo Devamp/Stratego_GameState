@@ -302,49 +302,7 @@ public class GameState {
     public boolean placeRemove(int player, int value, int row, int col){
         if(phase == 0){
             if(board[row][col] == null){
-                String returnName;
-                //Find character string
-                switch(value){
-                    case 0:
-                        returnName = "Flag";
-                        break;
-                    case 1:
-                        returnName = "Marshall";
-                        break;
-                    case 2:
-                        returnName = "General";
-                        break;
-                    case 3:
-                        returnName = "Colonel";
-                        break;
-                    case 4:
-                        returnName = "Major";
-                        break;
-                    case 5:
-                        returnName = "Captain";
-                        break;
-                    case 6:
-                        returnName = "Lieutenant";
-                        break;
-                    case 7:
-                        returnName = "Sergeant";
-                        break;
-                    case 8:
-                        returnName = "Miner";
-                        break;
-                    case 9:
-                        returnName = "Scout";
-                        break;
-                    case 10:
-                        returnName = "Bomb";
-                        break;
-                    case 11:
-                        returnName = "Spy";
-                        break;
-                    default:
-                        returnName = "";
-                        break;
-                }
+                String returnName = setName(value);
                 //Put piece in that spot
                 board[row][col] = new Piece(returnName,value,player);
                 return true;

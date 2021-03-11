@@ -80,11 +80,11 @@ public class Piece {
             return true;
         }
         //don't move bomb or flag
-        if(this.getValue() <= 0 || this.getValue() == 10 || this.getPlayer() < 0){
+        if(this.getValue() == 0 || this.getValue() == 10 || this.getPlayer() < 0){
             return false;
         }
         //Don't move on lake
-        if(toPlace.getPlayer() < 0 || toPlace.value < 0){
+        if(toPlace.getPlayer() < 0){
             return false;
         }
         //if a piece tries to move onto a space that is occupied by a friendly piece, can't move
