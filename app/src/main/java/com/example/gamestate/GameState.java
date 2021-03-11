@@ -238,13 +238,13 @@ public class GameState {
                 returnName = "Miner";
                 break;
             case 9:
-                returnName = "scout";
+                returnName = "Scout";
                 break;
             case 10:
-                returnName = "bomb";
+                returnName = "Bomb";
                 break;
             case 11:
-                returnName = "spy";
+                returnName = "Spy";
                 break;
             default:
                 returnName = "";

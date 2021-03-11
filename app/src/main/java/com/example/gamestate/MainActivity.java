@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 secondInstance.action(6,0,5,1);
                 secondInstance.action(5,1,5,2);
                 secondInstance.action(4,0,3,0);
-
                 String ogBoard = firstInstance.toString();
                 String toString = secondInstance.toString();
                 mainText.setText(ogBoard);
