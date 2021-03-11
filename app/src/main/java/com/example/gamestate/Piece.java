@@ -33,9 +33,10 @@ public class Piece {
     public String toString(){
         String toReturn;
         if(isVisible){
-            toReturn = "P:" + player + ", N:" + name + ", V:" + value;
+//            toReturn = "P:" + player + ", N:" + name + ", V:" + value;
+            toReturn = " (" + name.substring(0, 2) + ", " + value + ") ";
         }else{
-            toReturn = "INV";
+            toReturn = " (INV) ";
         }
 
         return toReturn;

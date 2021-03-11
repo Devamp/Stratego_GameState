@@ -293,18 +293,17 @@ public class GameState {
     /**
      * placeRemove: places a single piece or removes a single piece
      *
-     * @param player - whose player it is
      * @param value - what the piece value is
      * @param row - row to place piece
      * @param col- col to place piece
      * @return returns true if piece is removed or placed, false if failure
      */
-    public boolean placeRemove(int player, int value, int row, int col){
+    public boolean placeRemove(int value, int row, int col){
         if(phase == 0){
             if(board[row][col] == null){
                 String returnName = setName(value);
                 //Put piece in that spot
-                board[row][col] = new Piece(returnName,value,player);
+                board[row][col] = new Piece(returnName,value,turn);
                 return true;
             }
             else if(board[row][col].getValue() < 0|| board[row][col].getPlayer()  <0 ){
