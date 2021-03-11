@@ -57,10 +57,21 @@ public class MainActivity extends AppCompatActivity {
                 //call toString
                 secondInstance.action(6,0,5,0);
                 mainText.append("Player 1 tries to move piece from (6,0) to (5,0)\n");
+                mainText.append("\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
+
                 secondInstance.action(5,0,5,1);
                 mainText.append("Player 1 tries to move piece from (5,0) to (5,1)\n");
+                mainText.append("\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
+
                 secondInstance.action(5,1,5,2);
                 mainText.append("Player 1 tries to move piece from (5,1) to (5,2)\n\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
+
                 String ogBoard = firstInstance.toString();
                 String toString = secondInstance.toString();
                 mainText.append(ogBoard);
