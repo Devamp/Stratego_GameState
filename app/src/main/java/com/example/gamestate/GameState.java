@@ -290,6 +290,73 @@ public class GameState {
         return true;
     }
 
+    public boolean placeRemove(int player, int value, int row, int col){
+        if(phase == 0){
+            if(board[row][col] == null){
+                String returnName;
+                //Find character string
+                switch(value){
+                    case 0:
+                        returnName = "Flag";
+                        break;
+                    case 1:
+                        returnName = "Marshall";
+                        break;
+                    case 2:
+                        returnName = "General";
+                        break;
+                    case 3:
+                        returnName = "Colonel";
+                        break;
+                    case 4:
+                        returnName = "Major";
+                        break;
+                    case 5:
+                        returnName = "Captain";
+                        break;
+                    case 6:
+                        returnName = "Lieutenant";
+                        break;
+                    case 7:
+                        returnName = "Sergeant";
+                        break;
+                    case 8:
+                        returnName = "Miner";
+                        break;
+                    case 9:
+                        returnName = "scout";
+                        break;
+                    case 10:
+                        returnName = "bomb";
+                        break;
+                    case 11:
+                        returnName = "spy";
+                        break;
+                    default:
+                        returnName = "";
+                        break;
+                }
+                //Put piece in that spot
+                board[row][col] = new Piece(returnName,value,player);
+                return true;
+            }
+            else if(board[row][col].getValue() < 0|| board[row][col].getPlayer()  <0 ){
+                //don't mess with lake
+                return false;
+
+            }
+            else{
+                //Remove piece if one is already there
+                board[row][col] = null;
+                return true;
+            }
+        }
+        else{
+            return false;
+        }
+
+    }
+
     public boolean action(int fromX, int fromY, int toX, int toY) {
         int whoseE = (turn +1)%2;
         boolean success = false;
@@ -498,7 +565,6 @@ public class GameState {
                             blueCharacter[pieceValue] += 1;
                 break;
         }
-
     }
 
 }
