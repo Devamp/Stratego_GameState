@@ -73,7 +73,9 @@ public class Piece {
 
     public boolean move(Piece toPlace){
         boolean toReturn = true;
-
+        if(this.getValue() == 0 || this.getValue() == 10){
+            return false;
+        }
         if(toPlace == null){
             return true;
         }
@@ -85,6 +87,8 @@ public class Piece {
         else if(toPlace.getPlayer() == -1){
             toReturn = false;
         }
+
+
         return toReturn;
     }
 

@@ -301,48 +301,8 @@ public class GameState {
             return false;
         }
         //If not 9
-        if((Math.abs(fromX - toX) > 1 ||  Math.abs(fromY- toY) > 1) &&  board[fromX][fromY].getValue() != 9){
+        if((Math.abs(fromX - toX) > 1 ||  Math.abs(fromY- toY) > 1) && (board[fromX][fromY].getValue() != 9 || board[toX][toY] != null)){
             return false;
-        }
-        //Check to make sure 9 only goes through empty spaces
-        else if(board[fromX][fromY].getValue() == 9){
-            if(fromX > toX){
-                for(int i = fromX - 1; i >= toX; i--){
-                    if(board[i][fromY] != null){
-                        //Invalid
-                        return false;
-                    }
-                }
-
-            }
-            else if(fromY > toY){
-                for(int i = fromY - 1; i >= toY; i--){
-                    if(board[fromX][i] != null){
-                        //Invalid
-                        return false;
-                    }
-
-                }
-
-            }
-            else if(fromY < toY){
-                for(int i = fromY + 1; i <= toY; i++){
-                    if(board[fromX][i] != null){
-                        //Invalid
-                        return false;
-                    }
-                }
-            }
-            else if(fromX < toX){
-            for(int i = fromX + 1; i <= toX; i++){
-                if(board[i][fromY] != null){
-                    //Invalid
-                    return false;
-                }
-            }
-
-
-            }
         }
 
             if (board[fromX][fromY].move(board[toX][toY])) {
@@ -355,17 +315,17 @@ public class GameState {
                 //Attack
                 else if(board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
                     //If pieces are the same value
-                    if(board[fromX][fromY].getValue() == board[toX][toY].getValue()){
+                    if(board[fromX][fromY].getValue() == board[toX][toY].getValue() && board[fromX][fromY].getValue() != 9){
                         //Increase captured by both
-                        increaseCap(whoseE,board[toX][toY].getValue(),board[toX][toY].getPlayer());
-                        increaseCap(turn,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
+                        increaseCap(whoseE,board[toX][toY].getValue());
+                        increaseCap(turn,board[fromX][fromY].getValue());
                         board[fromX][fromY] = null;
                         board[toX][toY] = null;
                     }
                     //If piece attacking is successful
                     else if (board[fromX][fromY].attack(board[toX][toY])) {
                         //Increase num captured by attacker
-                        increaseCap(whoseE,board[toX][toY].getValue(),board[toX][toY].getPlayer());
+                        increaseCap(whoseE,board[toX][toY].getValue());
                         board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
                         board[fromX][fromY] = null;
 
@@ -373,13 +333,53 @@ public class GameState {
                     //If piece defending is successful
                     else {
                         //Increase num captured by defender
-                        increaseCap(turn,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
+                        increaseCap(turn,board[fromX][fromY].getValue());
                         board[fromX][fromY] = null;
                     }
                     success = true;
                 }
                 //Move
                 else {
+                    //Check to make sure 9 only goes through empty spaces
+                    if(board[fromX][fromY].getValue() == 9){
+                        if(fromX > toX){
+                            for(int i = fromX - 1; i >= toX; i--){
+                                if(board[i][fromY] != null){
+                                    //Invalid
+                                    return false;
+                                }
+                            }
+
+                        }
+                        else if(fromY > toY){
+                            for(int i = fromY - 1; i >= toY; i--){
+                                if(board[fromX][i] != null){
+                                    //Invalid
+                                    return false;
+                                }
+
+                            }
+
+                        }
+                        else if(fromY < toY){
+                            for(int i = fromY + 1; i <= toY; i++){
+                                if(board[fromX][i] != null){
+                                    //Invalid
+                                    return false;
+                                }
+                            }
+                        }
+                        else if(fromX < toX){
+                            for(int i = fromX + 1; i <= toX; i++){
+                                if(board[i][fromY] != null){
+                                    //Invalid
+                                    return false;
+                                }
+                            }
+
+
+                        }
+                    }
                     board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
                     board[fromX][fromY] = null;
                     success = true;
@@ -488,59 +488,13 @@ public class GameState {
          return isTrue;
     }
     
-    public void increaseCap(int w, int pieceValue, int player){
+    public void increaseCap(int w, int pieceValue){
         switch (w){
             case 0:
-                switch(pieceValue) {
-                    case -1:
-                        redCharacter[11] += 1;
-                        break;
-                    case -2:
-                        redCharacter[10] += 1;
-                        break;
-                    case 10:
-                        redCharacter[0] += 1;
-                        break;
-                    default:
                         redCharacter[pieceValue] += 1;
-                        break;
-                }
                 break;
             case 1:
-                if(player == 1){
-                    switch(pieceValue) {
-                        case -1:
-                            blueCharacter[11] += 1;
-                            break;
-                        case -2:
-                            blueCharacter[10] += 1;
-                            break;
-                        case 10:
-                            blueCharacter[0] += 1;
-                            break;
-                        default:
                             blueCharacter[pieceValue] += 1;
-                            break;
-                    }
-
-                }
-                else{
-                    switch(pieceValue) {
-                        case -1:
-                            redCharacter[11] += 1;
-                            break;
-                        case -2:
-                            redCharacter[10] += 1;
-                            break;
-                        case 10:
-                            redCharacter[0] += 1;
-                            break;
-                        default:
-                            redCharacter[pieceValue] += 1;
-                            break;
-                    }
-
-                }
                 break;
         }
 
