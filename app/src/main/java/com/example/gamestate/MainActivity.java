@@ -61,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
                 mainText.append("Player 1 tries to move piece from (5,0) to (5,1)\n");
                 secondInstance.action(5,1,5,2);
                 mainText.append("Player 1 tries to move piece from (5,1) to (5,2)\n\n");
+                //Diagonal test should never work
+                secondInstance.action(6,9,5,8);
+                //Multi-space move test should work for scout
+                secondInstance.action(6,8,4,8);
+                //take test(should work unless bomb or flag)
+                secondInstance.action(6,5,5,5);
+                secondInstance.action(6,5,4,5);
+
+
+
+                mainText.append("Player 1 tries to move piece from (5,1) to (5,2)\n\n");
                 String ogBoard = firstInstance.toString();
                 String toString = secondInstance.toString();
                 mainText.append(ogBoard);

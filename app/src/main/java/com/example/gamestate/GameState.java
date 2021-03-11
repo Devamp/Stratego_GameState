@@ -547,4 +547,27 @@ public class GameState {
         }
     }
 
+    public String movePrint(int row, int col, int frow, int fcol){
+
+        boolean attacking = false;
+
+        if(board[frow][fcol] != null){
+            attacking = true;
+        }
+        if(this.action(row,col,frow,fcol)){
+            if(attacking){
+                return "Piece at (" + row + "," + col + ") attacked piece at (" + frow + "," + fcol + ") and the movement was successful!";
+            }
+            else{
+                return "Piece at (" + row + "," + col + ") moved to (" + frow + "," + fcol + ") and the movement was successful!";
+
+            }
+        }
+        else{
+            return "Piece at (" + row + "," + col + ") attempted to move to (" + frow + "," + fcol + ") and the movement was unsuccessful!";
+
+        }
+    }
+
+
 }
