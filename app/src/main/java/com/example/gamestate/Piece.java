@@ -75,6 +75,10 @@ public class Piece {
 
     public boolean move(Piece toPlace){
         boolean toReturn = true;
+        //prevent null point exception
+        if(toPlace == null){
+            return true;
+        }
         //don't move bomb or flag
         if(this.getValue() <= 0 || this.getValue() == 10 || this.getPlayer() < 0){
             return false;
@@ -82,9 +86,6 @@ public class Piece {
         //Don't move on lake
         if(toPlace.getPlayer() < 0 || toPlace.value < 0){
             return false;
-        }
-        if(toPlace == null){
-            return true;
         }
         //if a piece tries to move onto a space that is occupied by a friendly piece, can't move
         if(this.getPlayer() == toPlace.getPlayer()){
