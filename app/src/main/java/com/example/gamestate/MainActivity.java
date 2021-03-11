@@ -10,6 +10,7 @@ import android.widget.EditText;
 /**
  * @author Gareth Rice
  * @author Caden Deutscher
+ * @author Hewlett De Lara
  *
  * @version 3/21
  *

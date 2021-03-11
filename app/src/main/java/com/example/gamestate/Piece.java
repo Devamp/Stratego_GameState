@@ -3,6 +3,7 @@ package com.example.gamestate;
 /**
  * @author Gareth Rice
  * @author Caden Deutscher
+ * @author Hewlett De Lara
  *
  * @version 3/21
  */
