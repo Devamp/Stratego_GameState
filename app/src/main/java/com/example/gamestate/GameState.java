@@ -356,24 +356,25 @@ public class GameState {
                 else if(board[fromX][fromY].getPlayer() != board[toX][toY].getPlayer() && board[toX][toY].getPlayer() != -1) {
                     //If pieces are the same value
                     if(board[fromX][fromY].getValue() == board[toX][toY].getValue()){
-                        board[fromX][fromY] = null;
-                        board[toX][toY] = null;
                         //Increase captured by both
                         increaseCap(0,board[toX][toY].getValue(),board[toX][toY].getPlayer());
+                        increaseCap(0,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
+                        board[fromX][fromY] = null;
+                        board[toX][toY] = null;
                     }
                     //If piece attacking is successful
                     else if (board[fromX][fromY].attack(board[toX][toY])) {
-                        board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
-                        board[fromX][fromY] = null;
                         //Increase num captured by attacker
                         increaseCap(1,board[toX][toY].getValue(),board[toX][toY].getPlayer());
+                        board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
+                        board[fromX][fromY] = null;
 
                     }
                     //If piece defending is successful
                     else {
-                        board[fromX][fromY] = null;
                         //Increase num captured by defender
                         increaseCap(1,board[fromX][fromY].getValue(),board[fromX][fromY].getPlayer());
+                        board[fromX][fromY] = null;
                     }
                     success = true;
                 }
