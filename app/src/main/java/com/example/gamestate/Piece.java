@@ -13,9 +13,10 @@ public class Piece {
     private int player;
 
     private String name;
-    //if the value is -1, it is a flag
-    //if the value is -2, it is a bomb
-    //if the value is 10, it is the spy
+
+    //if the value is 0, it is a flag
+    //if the value is 10, it is a bomb
+    //if the value is 11, it is the spy
     private int value;
 
     private boolean isVisible = true;
@@ -88,21 +89,27 @@ public class Piece {
     }
 
     public boolean attack(Piece toAttack){
-        boolean success = true;
-        if(this.getValue() == 8 && toAttack.getValue() == -2){ //miner attacks bomb
+        if(toAttack.getValue() == 0){
+            return true;
         }
-        else if(toAttack.getValue() == -2){
-            success =false;
+        else if(this.getValue() == 8 && toAttack.getValue() == 10){
+            return true;
         }
-        else if(this.getValue() == 10  && toAttack.getValue() == 1){
-
+        else if(toAttack.getValue() == 10){
+           return false;
+        }
+        else if(this.getValue() == 11  && toAttack.getValue() == 1){
+            return true;
         }
         else if(this.getValue() < toAttack.getValue()){
+            return true;
         }
         else if(this.getValue() > toAttack.getValue()){
-            success = false;
+           return false;
         }
-        return success;
+        else{
+            return true;
+        }
     }
 
 }
