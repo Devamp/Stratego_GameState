@@ -116,7 +116,7 @@ public class GameState {
                 //create a deep copy of each piece
                 if(original.board[i][j] != null) {
                     //need to create a special piece if it's a bomb or flag
-                    if(original.board[i][j].getName().equals("Bomb") || original.board[i][j].getName().equals("Flag")) {
+                    if(original.board[i][j].getName().equalsIgnoreCase("Bomb") || original.board[i][j].getName().equalsIgnoreCase("Flag")) {
                         board[i][j] = new SpecialPiece(original.board[i][j].getName(), original.board[i][j].getValue(), original.board[i][j].getPlayer());
                         board[i][j].setVisible(original.board[i][j].getVisible());
                     }
