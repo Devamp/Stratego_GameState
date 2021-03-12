@@ -104,6 +104,16 @@ public class MainActivity extends AppCompatActivity {
                 mainText.append("[FOURTH INSTANCE]");
                 mainText.append("\n");
                 mainText.append(fourthInstance.toString());
+                mainText.append("\n");
+
+                mainText.append("Player 1 ends their turn. Re-print GameState.\n");
+                mainText.append("\n");
+                mainText.append(secondInstance.printBoard());
+                mainText.append("\n");
+                secondInstance.endTurn(secondInstance);
+                GameState tester = new GameState(secondInstance);
+                mainText.append(tester.printBoard());
+                mainText.append(tester.toString());
 
 
             }

@@ -317,7 +317,7 @@ public class GameState {
             if(board[row][col] == null){
                 String returnName = setName(value);
                 //Put piece in that spot
-                board[row][col] = new Piece(returnName,value,turn);
+                board[row][col] = new Piece(returnName,value, turn);
                 return true;
             }
             else if(board[row][col].getValue() < 0|| board[row][col].getPlayer()  <0 ){
