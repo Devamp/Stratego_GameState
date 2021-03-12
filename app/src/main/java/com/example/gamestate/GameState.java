@@ -452,6 +452,11 @@ public class GameState {
             return success;
     }
 
+    /**
+     * printBoard prints the pieces on the board with piece information and visibility
+     *
+     * @return
+     */
     public String printBoard(){
         String boardS = "";
         for(int i = 0; i < board.length; i++){
@@ -468,7 +473,11 @@ public class GameState {
         return boardS;
     }
 
-    //toString method print current state of the game as a String
+    /**
+     * toString returns state of the game
+     *
+     * @return
+     */
     @Override
     public String toString(){
         String finalMessage;
@@ -531,6 +540,12 @@ public class GameState {
         return finalMessage;
     }
 
+    /**
+     * endTurn switches over whose turn it is
+     *
+     * @param gameState
+     * @return
+     */
     public boolean endTurn(GameState gameState) {
         boolean isTrue = false;
         // Player 1 (represented by 0) ended turn
@@ -568,6 +583,15 @@ public class GameState {
         }
     }
 
+    /**
+     * movePrint takes the start location and end location to comment on the move and its success
+     *
+     * @param row
+     * @param col
+     * @param frow
+     * @param fcol
+     * @return
+     */
     public String movePrint(int row, int col, int frow, int fcol){
 
         boolean attacking = false;
