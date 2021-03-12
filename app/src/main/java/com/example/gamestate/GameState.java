@@ -560,6 +560,28 @@ public class GameState {
     }
 
     /**
+     * setPhase: set the state of the Game State
+     *
+     * @param gameState - the state of the game
+     * @param newPhase - the phase to be set onto the Game State
+     *
+     * @return returns isTrue, TRUE if phase is 0, 1, or 2; FALSE otherwise
+     */
+    public boolean setPhase(GameState gameState, int newPhase) {
+        boolean isTrue = false;
+
+        if (gameState.phase == 0 || gameState.phase == 1 || gameState.phase == 2) {
+            gameState.phase = newPhase;
+            isTrue = true;
+        }
+        else {
+            isTrue = false;
+        }
+
+        return isTrue;
+    }
+
+    /**
      *increaseCap - increase the captured pieces of the pieceValue type
      *
      * @param player - player whose playing
