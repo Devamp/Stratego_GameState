@@ -74,6 +74,12 @@ public class Piece {
         return player;
     }
 
+    /**
+     * move gives move checks to make sure a move is legal.
+     *
+     * @param toPlace
+     * @return
+     */
     public boolean move(Piece toPlace){
         boolean toReturn = true;
         //prevent null point exception
@@ -101,6 +107,12 @@ public class Piece {
         return toReturn;
     }
 
+    /**
+     * Attack compares values to determine legal attacks.
+     *
+     * @param toAttack
+     * @return
+     */
     public boolean attack(Piece toAttack){
         if(toAttack.getValue() == 0){
             return true;
