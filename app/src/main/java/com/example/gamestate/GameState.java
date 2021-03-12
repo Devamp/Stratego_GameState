@@ -531,6 +531,13 @@ public class GameState {
         return finalMessage;
     }
 
+    /**
+     * endTurn: ends the current player's turn and updates the GameState turn
+     *
+     * @param gameState - the state of the game
+     *
+     * @return returns isTrue, TRUE if player # is 0 or 1; FALSE otherwise
+     */
     public boolean endTurn(GameState gameState) {
         boolean isTrue = false;
         // Player 1 (represented by 0) ended turn
