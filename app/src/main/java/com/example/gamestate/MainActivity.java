@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 //clear the edit text
                 mainText.setText("");
 
+
                 GameState firstInstance = new GameState();
 
                 GameState secondInstance = new GameState(firstInstance);
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 GameState thirdInstance = new GameState();
 
                 GameState fourthInstance = new GameState(thirdInstance);
+
+                firstInstance.setPhase(firstInstance, 1); //set phase to game play phase
 
                 //call toString
                 mainText.append(firstInstance.movePrint(6,0,5,0));
