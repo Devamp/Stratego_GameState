@@ -107,6 +107,7 @@ public class GameState {
 
         //make new array for the board
         board = new Piece[10][10];
+        turn = original.turn;
 
         //set the new board state equal to original board state
         for(int i = 0; i < board.length; i++){
@@ -146,7 +147,6 @@ public class GameState {
         }
 
         //copy over information (not deep copied)
-        turn = original.turn;
         timer = original.timer;
         phase = original.phase;
 
