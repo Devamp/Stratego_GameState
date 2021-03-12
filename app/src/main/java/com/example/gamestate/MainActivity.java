@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 mainText.append("[SECOND INSTANCE]");
                 mainText.append("\n");
                 mainText.append(secondInstance.toString());
-                mainText.append(secondInstance.printBoard());
+
 
                 mainText.append("\n");
                 mainText.append("[FOURTH INSTANCE]");
@@ -109,11 +109,16 @@ public class MainActivity extends AppCompatActivity {
 
                 mainText.append("Player 1 ends their turn. Re-print GameState.\n");
                 mainText.append("\n");
+                mainText.append("Before player 1 ends turn:\n");
+                mainText.append("\n");
                 mainText.append(secondInstance.printBoard());
                 mainText.append("\n");
                 secondInstance.endTurn(secondInstance);
+                mainText.append("After player 1 has ended their turn: \n");
+                mainText.append("\n");
                 GameState tester = new GameState(secondInstance);
                 mainText.append(tester.printBoard());
+                mainText.append("\n");
                 mainText.append(tester.toString());
 
 
