@@ -452,6 +452,7 @@ public class GameState {
             return success;
     }
 
+    //print the current state of the board
     public String printBoard(){
         String boardS = "";
         for(int i = 0; i < board.length; i++){
@@ -569,6 +570,8 @@ public class GameState {
     }
 
     public String movePrint(int row, int col, int frow, int fcol){
+
+
 
         boolean attacking = false;
         if(board[row][col] == null) {
