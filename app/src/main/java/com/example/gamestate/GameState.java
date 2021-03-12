@@ -276,6 +276,18 @@ public class GameState {
         //iterate over the first 4, or last 4 rows depending on blue or red player
         for(int i = start; i < start + 4; i++){
             for(int j = 0; j < board[i].length; j++){
+
+                //place the flag in the last possible place
+                if(j == board[i].length - 1 && i == start + 3){
+                    board[i][j] = currentArmy.get(0);
+                    currentArmy.remove(0);
+                }else{
+                    board[i][j] = currentArmy.get(1);
+                    currentArmy.remove(1);
+                }
+
+
+                /*
                 //set the index i j to a random piece from specific players arrayList of
                 //instantiated pieces
                 randomIndex = (int) (Math.random() * currentArmy.size());
@@ -284,6 +296,8 @@ public class GameState {
                 board[i][j] = currentArmy.get(randomIndex);
                 //once placed from bench it should be removed as its now on the board
                 currentArmy.remove(randomIndex);
+
+                 */
             }
         }
 
