@@ -214,7 +214,6 @@ public class GameState {
     public String setName(int whichName){
         String returnName;
 
-        //probably a poor way to get the name? Can use hashtable?
         switch(whichName){
             case 0:
                 returnName = "Flag";
