@@ -19,6 +19,7 @@ public class Piece {
     //if the value is 0, it is a flag
     //if the value is 10, it is a bomb
     //if the value is 11, it is the spy
+    //use enum...
     private int value;
 
     private boolean isVisible = true;

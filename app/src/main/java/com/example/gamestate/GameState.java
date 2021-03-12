@@ -447,7 +447,11 @@ public class GameState {
 
                         }
                     }
+                    //moving reference instead of creating new one and nulling out
+                    //do a swap
                     board[toX][toY] = new Piece(board[fromX][fromY].getName(), board[fromX][fromY].getValue(), board[fromX][fromY].getPlayer());
+//                    Piece temp = board[fromX][fromY];
+//                    board[toX][toY] = board[fromX][fromY];
                     board[fromX][fromY] = null;
                     success = true;
                 }
