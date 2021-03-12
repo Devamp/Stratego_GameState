@@ -3,6 +3,7 @@ package com.example.gamestate;
 import java.util.ArrayList;
 
 /**
+ *
  * @author Gareth Rice
  * @author Devam Patel
  * @author Caden Deutscher
@@ -265,6 +266,7 @@ public class GameState {
      *
      * @return
      */
+
     public boolean place(int player){
         int start;
         int randomIndex;
@@ -304,6 +306,7 @@ public class GameState {
                 currentArmy.remove(randomIndex);
 
                  */
+
             }
         }
 
