@@ -57,48 +57,49 @@ public class MainActivity extends AppCompatActivity {
                 GameState fourthInstance = new GameState(thirdInstance);
 
                 //call toString
-                mainText.append(secondInstance.movePrint(6,0,5,0));
+                mainText.append(firstInstance.movePrint(6,0,5,0));
                 mainText.append("\n\n");
-                mainText.append(secondInstance.printBoard());
+                mainText.append(firstInstance.printBoard());
                 mainText.append("\n");
 
-                mainText.append(secondInstance.movePrint(5,0,5,1));
+                mainText.append(firstInstance.movePrint(5,0,5,1));
                 mainText.append("\n\n");
-                mainText.append(secondInstance.printBoard());
+                mainText.append(firstInstance.printBoard());
                 mainText.append("\n");
 
-                mainText.append(secondInstance.movePrint(5,1,5,2));
+                mainText.append(firstInstance.movePrint(5,1,5,2));
                 mainText.append("\n\n");
-                mainText.append(secondInstance.printBoard());
+                mainText.append(firstInstance.printBoard());
                 mainText.append("\n");
                 //Diagonal test should never work
-                mainText.append(secondInstance.movePrint(6,9,5,8));
+                mainText.append(firstInstance.movePrint(6,9,5,8));
                 mainText.append("\n\n");
-                mainText.append(secondInstance.printBoard());
+                mainText.append(firstInstance.printBoard());
                 mainText.append("\n");
                 //Multi-space move test should work for scout
-                mainText.append(secondInstance.movePrint(6,8,4,8));
+                mainText.append(firstInstance.movePrint(6,8,4,8));
                 mainText.append("\n\n");
-                mainText.append(secondInstance.printBoard());
+                mainText.append(firstInstance.printBoard());
                 mainText.append("\n");
                 //take test(should work unless bomb or flag)
-                mainText.append(secondInstance.movePrint(6,5,5,5));
+                mainText.append(firstInstance.movePrint(6,5,5,5));
                 mainText.append("\n\n");
-                mainText.append(secondInstance.printBoard());
+                mainText.append(firstInstance.printBoard());
                 mainText.append("\n");
-                mainText.append(secondInstance.movePrint(5,5,4,5));
+                mainText.append(firstInstance.movePrint(5,5,4,5));
                 mainText.append("\n\n");
-                mainText.append(secondInstance.printBoard());
+                mainText.append(firstInstance.printBoard());
                 mainText.append("\n");
-                mainText.append(secondInstance.movePrint(4,5,3,5));
+                mainText.append(firstInstance.movePrint(4,5,3,5));
                 mainText.append("\n\n");
-                mainText.append(secondInstance.printBoard());
+                mainText.append(firstInstance.printBoard());
                 mainText.append("\n");
 
                 mainText.append("\n");
                 mainText.append("[SECOND INSTANCE]");
                 mainText.append("\n");
                 mainText.append(secondInstance.toString());
+                mainText.append(secondInstance.printBoard());
 
                 mainText.append("\n");
                 mainText.append("[FOURTH INSTANCE]");

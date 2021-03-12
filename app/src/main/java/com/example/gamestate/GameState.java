@@ -150,8 +150,14 @@ public class GameState {
         timer = original.timer;
         phase = original.phase;
 
-        blueCharacter = original.blueCharacter;
-        redCharacter = original.redCharacter;
+        blueCharacter = new int[12];
+        redCharacter = new int[12];
+
+        for(int i = 0; i < blueCharacter.length; i++){
+            blueCharacter[i] = original.blueCharacter[i];
+            redCharacter[i] = original.redCharacter[i];
+        }
+
         blueBench = original.blueBench;
         redBench = original.redBench;
 
